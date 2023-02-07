@@ -2,7 +2,6 @@
 ##                                         ##
 ##        Emegency Room Simulation         ##
 ##        Author: Vivian Bui               ##
-##        Last updated: 02/03/2022         ##
 ##                                         ##
 #############################################
 

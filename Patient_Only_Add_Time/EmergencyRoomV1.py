@@ -3,7 +3,6 @@
 ##        Emegency Room Simulation         ##
 ##        Author: Vivian Bui               ## 
 ##        File: Emergency Room Class       ## 
-##        Last updated: 02/03/2022         ##
 ##                                         ##
 #############################################
 
