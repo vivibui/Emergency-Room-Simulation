@@ -12,7 +12,6 @@
 class EmergencyRoom: 
     def __init__(self, **kwargs): 
         self.__patients = []
-        self.__total_beds = kwargs['total_beds']
         self.__open_beds = kwargs['open_beds']
 
     def get_patients(self): 
@@ -22,9 +21,6 @@ class EmergencyRoom:
         for patient in self.__patients: 
             if id == patient.get_id(): 
                 return patient 
-    
-    def get_total_beds(self): 
-        return self.__total_beds 
     
     def get_open_beds(self): 
         return self.__open_beds
