@@ -10,7 +10,7 @@
 
 import random 
 import EmergencyRoomV1
-import PatientV1
+import PatientOpsV1 as po 
 
 
 # Max days to run simulation 
@@ -20,54 +20,6 @@ MAX_PATIENTS = 5
 # Initial Condition: ER Capacity 
 MAX_BEDS = 50
 AVAIL_BEDS = 5
-
-
-
-def PriorityScore(patient): 
-    # Priority order: Acute level -> Age 
-    # The lower the score, the higher priority the patient is 
-
-    # Acute Level
-    score = 0
-    score += patient.get_acute_level()
-    # Age group Priority 
-    if patient.get_age() <= 10 or patient.get_age() >= 65: 
-        score += 0.1
-    elif patient.get_age() > 10 and patient.get_age() < 21: 
-        score += 0.2 
-    else: 
-        score += 0.3
-    return score 
-
-
-
-def NewPatient(p_id, t): 
-    p_age = random.randint(1,100) # Max age is 100
-    p_acute_level = random.randint(1,5)
-    p_pain_level = random.randint(1,10)
-    p_code = "P"
-    p_time_coming = t
-    p_new_patient = PatientV1.Patient(code = p_code, id = p_id, age = p_age, acute_level = p_acute_level, pain_level = p_pain_level, time_coming = p_time_coming)
-    p_priority_score = PriorityScore(p_new_patient)
-    p_new_patient.set_priority_score(p_priority_score)
-    return p_new_patient 
-
-
-
-def TimeInER(person): 
-    # Set time stay in ER based on pain level
-    if person.get_acute_level() == 1: 
-        mean_time = 5
-    elif person.get_acute_level() == 2: 
-        mean_time = 4
-    elif person.get_acute_level() == 3: 
-        mean_time = 3
-    elif person.get_acute_level() == 4: 
-        mean_time = 2
-    else: 
-        mean_time = 1 
-    # Set ER time 
-    person.set_time_in_ER(mean_time)
 
 
 def write_to_txt(file_name, header, content): 
@@ -109,7 +61,7 @@ def main():
         for i in range(total_patient_today): 
             id += 1 
             # Pass list of new patients today to the Emergency Room 
-            all_patients.append(NewPatient(id, day)) 
+            all_patients.append(po.NewPatient(id, day)) 
             
         # Loop to release patients from beds 
         for patient in all_patients: 
@@ -174,7 +126,7 @@ def main():
                 get_person.set_status(1)
 
                 # Set time stay in ER
-                TimeInER(get_person)
+                po.TimeInER(get_person)
 
                 # Set day admitted 
                 get_person.set_time_admitted(day)
