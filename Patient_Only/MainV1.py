@@ -12,7 +12,7 @@ import EmergencyRoomV1
 import PatientOpsV1 as po 
 import EROpsV1 as eo 
 import PrintingV1 as prt
-import Auxiliary as aux 
+import AuxiliaryV1 as aux 
 import QueueV1 as qu
 
 # Max days to run simulation 
