@@ -13,10 +13,11 @@ import PatientOpsV1 as po
 import EROpsV1 as eo 
 import PrintingV1 as prt
 import Auxiliary as aux 
+import QueueV1 as qu
 
 # Max days to run simulation 
 MAX_DAYS = 20
-# Max patients coming in a day  
+# Max patients coming in an hour  
 MAX_PATIENTS = 5
 # Initial Condition: ER Capacity 
 AVAIL_BEDS = 5
@@ -52,7 +53,7 @@ def main():
         # Loop to arrange patients to available beds 
         while emergency_room.get_open_beds() > 0 and emergency_room.count_waiting() > 0: 
             # Create queue 
-            queue = eo.CreateQueue(all_patients)
+            queue = qu.CreateQueue(all_patients)
             # Times assigning beds for today 
             if emergency_room.get_open_beds() > emergency_room.count_waiting(): 
                 time_assign_beds = emergency_room.count_waiting() 
