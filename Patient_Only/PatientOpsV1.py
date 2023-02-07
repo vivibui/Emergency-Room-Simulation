@@ -3,7 +3,7 @@
 ##        Emegency Room Simulation         ##
 ##        Author: Vivian Bui               ## 
 ##        File: Patient Operation          ## 
-##        Last updated: 02/03/2022         ##
+##        Last updated: 02/07/2022         ##
 ##                                         ##
 #############################################
 
