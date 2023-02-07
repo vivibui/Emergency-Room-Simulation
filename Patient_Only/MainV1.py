@@ -12,6 +12,7 @@ import EmergencyRoomV1
 import PatientOpsV1 as po 
 import EROpsV1 as eo 
 import PrintingV1 as prt
+import Auxiliary as aux 
 
 # Max days to run simulation 
 MAX_DAYS = 20
@@ -21,19 +22,12 @@ MAX_PATIENTS = 5
 AVAIL_BEDS = 5
 
 
-def ExportCSV(file_name, header, content): 
-    write_file = open(file_name, "w")
-    write_file.write(header) 
-    write_file.write(content) 
-    write_file.close() 
-
-
 def main(): 
     
     # Initialize 
     day = 0 
     count_release = 0 
-    id = 0 
+    p_id = 0 
     emergency_room = EmergencyRoomV1.EmergencyRoom(open_beds = AVAIL_BEDS)
     content_ops = ""  # to export result 
 
@@ -48,9 +42,9 @@ def main():
         total_patient_today = random.randint(0,MAX_PATIENTS)
         all_patients = emergency_room.get_patients()
         for i in range(total_patient_today): 
-            id += 1 
+            p_id = aux.IDIncrement(p_id) 
             # Pass list of new patients today to the Emergency Room 
-            all_patients.append(po.NewPatient(id, day)) 
+            all_patients.append(po.NewPatient(p_id, day)) 
         
         # Release patients from beds 
         emergency_room, count_release = eo.ReleasePatient(emergency_room, all_patients, day)
@@ -81,8 +75,8 @@ def main():
     header_patients, content_patients = prt.ListPatients(emergency_room) 
 
     # Write to csv
-    ExportCSV("emergency_ops", header, content_ops)
-    ExportCSV("patients_list", header_patients, content_patients)
+    aux.ExportCSV("emergency_ops", header, content_ops)
+    aux.ExportCSV("patients_list", header_patients, content_patients)
 
 
 if __name__ == '__main__':

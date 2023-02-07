@@ -15,8 +15,8 @@ def Header(AVAIL_BEDS):
     print("Beds available first opening:", AVAIL_BEDS) 
     # Header 
     print()
-    header = format("Day", "5s") + format("New Patients", "18s") + format("Available Beds", "18s") + format("Waiting", "12s") \
-             + format("Treating", "12s") + format("Treated", "12s") + format("Beds Released", "18s") + "\n"
+    header = format("Day", "5s") + format("New_Patients", "18s") + format("Available_Beds", "18s") + format("Waiting", "12s") \
+             + format("Treating", "12s") + format("Treated", "12s") + format("Beds_Released", "18s") + "\n"
     print(header)
     print() 
     return header 
@@ -37,9 +37,9 @@ def ListPatients(emergency_room):
     print("----------------------------------- LIST OF PATIENTS ----------------------------------- ")
     print()
     print() 
-    header_patients = format("Day Come In", "15s") + format("ID", "10s") + format("Age", "10s") \
-            + format("Acute Level", "20s") + format("Pain Level", "20s") \
-                + format("Status", "10s") + format("Day Admitted", "20s") + format("Day Released", "20s")
+    header_patients = format("Day_Come_In", "15s") + format("ID", "10s") + format("Age", "10s") \
+            + format("Acute_Level", "20s") + format("Pain_Level", "20s") \
+                + format("Status", "10s") + format("Day_Admitted", "20s") + format("Day_Released", "20s")
     print(header_patients)
     print()
     for patient in emergency_room.get_patients(): 
