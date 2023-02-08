@@ -14,6 +14,8 @@
 # Priority Score is calculated in ERSim 
 
 import PersonV1 
+from datetime import time
+
 
 class Patient(PersonV1.Person):
     def __init__(self, **kwargs): 
@@ -21,12 +23,15 @@ class Patient(PersonV1.Person):
         self.__age = kwargs['age']
         self.__acute_level = kwargs['acute_level']
         self.__pain_level = kwargs['pain_level']
-        self.__time_coming = kwargs['time_coming']
+        self.__day_coming = kwargs['day_coming']
+        self.__time_coming = None
         self.__status = 0
-        self.__time_in_ER = 0
+        self.__length_stay_in_ER = 0 # in minutes 
         self.__priority_score = 0
-        self.__time_admitted = 0 
-        self.__time_released = 0
+        self.__day_admitted = 0 # in day
+        self.__time_admitted = None
+        self.__day_released = 0 # in day 
+        self.__time_released = None
 
     ################################################   
     ###################  Get Method ################
@@ -43,22 +48,31 @@ class Patient(PersonV1.Person):
     def get_status(self):
         return self.__status 
 
-    def get_time_in_ER(self):
-        return self.__time_in_ER
+    def get_length_stay_in_ER(self):
+        return self.__length_stay_in_ER
 
     def get_priority_score(self):
         return self.__priority_score
 
     def get_time_coming(self):
-        return self.__time_coming
+        if self.__time_coming != None: 
+            return self.__time_coming.strftime(" %H:%M")
+        else: 
+            return "TBD"
 
     def get_time_admitted(self):
-        return self.__time_admitted
+        if self.__time_admitted != None: 
+            return self.__time_admitted.strftime(" %H:%M")
+        else: 
+            return "TBD"
 
     def get_time_released(self):
-        return self.__time_released
+        if self.__time_released != None: 
+            return self.__time_released.strftime(" %H:%M")
+        else: 
+            return "TBD"
 
-    
+
     ################################################   
     ###################  Set Method ################
 
@@ -68,14 +82,23 @@ class Patient(PersonV1.Person):
     def set_status(self, new_status): 
         self.__status = new_status 
 
-    def set_time_in_ER(self, new_time): 
-        self.__time_in_ER = new_time 
+    def set_length_stay_in_ER(self, new_time): 
+        self.__length_stay_in_ER = new_time 
 
     def deduct_time_in_ER(self): 
-        self.__time_in_ER -= 1
+        self.__length_stay_in_ER -= 1
+
+    def set_time_coming(self, new_time): 
+        self.__time_coming = new_time 
 
     def set_time_admitted(self, new_time): 
         self.__time_admitted = new_time
+
+    def set_day_admitted(self, day): 
+        self.__day_admitted = day 
+
+    def set_day_released(self, day): 
+        self.__day_released = day 
     
     def set_time_released(self, new_time): 
         self.__time_released = new_time
@@ -84,7 +107,9 @@ class Patient(PersonV1.Person):
     #####################  Print ###################
 
     def __str__(self): 
-        return format(self.__time_coming, "<15d") + super().__str__() \
-                + format(self.__age, "<10d") + format(self.__acute_level, "<20d") \
-                + format(self.__pain_level, "<20d") + format(self.__status, "<10d") + \
-                    format(self.__time_admitted, "<20d") + format(self.__time_released, "<20d")
+        return super().__str__()  + format(self.__day_coming, "<10d") + format(self.get_time_coming(), "<20s")\
+            + format(self.__age, "<10d") + format(self.__acute_level, "<10d") \
+                + format(self.__pain_level, "<10d") + format(self.__status, "<10d") \
+                    + format(self.__day_admitted, "<10d") + format(self.get_time_admitted(), "<20s") \
+                        + format(self.__day_released, "<10d") + format(self.get_time_released(), "<20s")
+     

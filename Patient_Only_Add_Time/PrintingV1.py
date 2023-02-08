@@ -21,6 +21,14 @@ def Header(AVAIL_BEDS):
     return header 
 
 
+def BedAssignmentLog(): 
+    print() 
+    print('----------------------------------------')
+    print("---------- BED ASSIGNMENT LOG ----------")
+    print('----------------------------------------')
+    header = format("Day", "5s") + format("Time", "18s") + format("Patient_ID", "5s") + "\n"
+
+    
 def Output(emergency_room, total_patient_today, time, count_release): 
     output = format(time, "<5d") + format(total_patient_today, "<18d") + format(emergency_room.get_open_beds(), "<18d") \
                  + format(emergency_room.count_waiting(), "<12d") + format(emergency_room.count_treating(), "<12d") \
@@ -36,9 +44,10 @@ def ListPatients(emergency_room):
     print("----------------------------------- LIST OF PATIENTS ----------------------------------- ")
     print()
     print() 
-    header_patients = format("Day_Come_In", "15s") + format("ID", "10s") + format("Age", "10s") \
-            + format("Acute_Level", "20s") + format("Pain_Level", "20s") \
-                + format("Status", "10s") + format("Day_Admitted", "20s") + format("Day_Released", "20s")
+    header_patients =  format("ID", "10s") + format("Day_C", "10s") + format("Time_C", "20s") + \
+                format("Age", "10s") + format("AcuteLv", "10s") + format("PainLv", "10s") \
+                + format("Status", "10s") + format("Day_A", "10s") + format("Time_A", "20s") \
+                    + format("Day_R", "10s") + format("Time_R", "20s")
     print(header_patients)
     print()
     for patient in emergency_room.get_patients(): 

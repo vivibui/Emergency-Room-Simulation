@@ -29,30 +29,31 @@ def PriorityScore(patient):
 
 
 
-def NewPatient(p_id, t): 
+def NewPatient(p_id, day, t): 
     p_age = random.randint(1,100) # Max age is 100
     p_acute_level = random.randint(1,5)
     p_pain_level = random.randint(1,10)
     p_code = "P"
-    p_time_coming = t
-    p_new_patient = PatientV1.Patient(code = p_code, id = p_id, age = p_age, acute_level = p_acute_level, pain_level = p_pain_level, time_coming = p_time_coming)
+    p_day_coming = day 
+    p_new_patient = PatientV1.Patient(code = p_code, id = p_id, age = p_age, acute_level = p_acute_level, pain_level = p_pain_level, day_coming = p_day_coming)
     p_priority_score = PriorityScore(p_new_patient)
     p_new_patient.set_priority_score(p_priority_score)
+    p_new_patient.set_time_coming(t)
     return p_new_patient 
 
 
 
 def TimeInER(person): 
-    # Set time stay in ER based on pain level
+    # Set time stay in ER (unit: minutes)
     if person.get_acute_level() == 1: 
-        mean_time = 5
+        mean_time = random.randint(0,1200)
     elif person.get_acute_level() == 2: 
-        mean_time = 4
+        mean_time = random.randint(0,1000)
     elif person.get_acute_level() == 3: 
-        mean_time = 3
+        mean_time = random.randint(0,800)
     elif person.get_acute_level() == 4: 
-        mean_time = 2
+        mean_time = random.randint(0,600)
     else: 
-        mean_time = 1 
+        mean_time = random.randint(0,400)
     # Set ER time 
-    person.set_time_in_ER(mean_time)
+    person.set_length_stay_in_ER(mean_time)

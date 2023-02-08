@@ -8,7 +8,6 @@
 
 
 import random 
-import EmergencyRoomV1
 import AuxiliaryV1 as aux 
 import PatientOpsV1 as po 
 import EROpsV1 as eo 
