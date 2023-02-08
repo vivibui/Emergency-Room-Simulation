@@ -9,8 +9,7 @@
 import PatientOpsV1 as po 
 import QueueV1 as qu 
 
-def ReleasePatient(emergency_room, all_patients, day, time): 
-    count_release = 0 
+def ReleasePatient(emergency_room, all_patients, day, time, count_release): 
     # Loop to release patients from beds 
     for patient in all_patients: 
         if patient.get_status() == 1:

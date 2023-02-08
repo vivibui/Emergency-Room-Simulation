@@ -8,31 +8,20 @@
 
 
 
-def Header(AVAIL_BEDS): 
-    # Initial Information
-    print()
-    print("Beds available first opening:", AVAIL_BEDS) 
-    # Header 
-    print()
-    header = format("Day", "5s") + format("New_Patients", "18s") + format("Available_Beds", "18s") + format("Waiting", "12s") \
-             + format("Treating", "12s") + format("Treated", "12s") + format("Beds_Released", "18s") + "\n"
-    print(header)
-    print() 
-    return header 
-
-
-def BedAssignmentLog(): 
+def LogHeader(day): 
     print() 
     print('----------------------------------------')
-    print("---------- BED ASSIGNMENT LOG ----------")
+    print(format(f'DAY {day}', "10s"))
     print('----------------------------------------')
-    header = format("Day", "5s") + format("Time", "18s") + format("Patient_ID", "5s") + "\n"
-
+    header = format(f'Day {day}', '10s') + format("New_Patients", "20s") + format("Waiting", "15s") \
+        + format("Admitted", "10s") + format("Released", "10s") + format("Beds_Avail_EOH", "15s") + "\n"
+    print(header) 
+    return header
     
-def Output(emergency_room, total_patient_today, time, count_release): 
-    output = format(time, "<5d") + format(total_patient_today, "<18d") + format(emergency_room.get_open_beds(), "<18d") \
-                 + format(emergency_room.count_waiting(), "<12d") + format(emergency_room.count_treating(), "<12d") \
-                 + format(emergency_room.count_treated(), "<12d") + format(count_release, "<18d")
+
+def LogOutput(emergency_room, total_patient_today, h, count_release): 
+    output = format(f'{h}:00', '<10s') + format(total_patient_today, '<20d') + format(emergency_room.count_waiting(), '<15d') \
+        + format(emergency_room.count_treating(), '<10d') + format(count_release, '<10d') + format(emergency_room.get_open_beds(), "<15d") + "\n"
     print(output)
     return output 
 
@@ -40,9 +29,9 @@ def Output(emergency_room, total_patient_today, time, count_release):
 def ListPatients(emergency_room): 
     content_patients = "" # to export result 
     print() 
-    print()
-    print("----------------------------------- LIST OF PATIENTS ----------------------------------- ")
-    print()
+    print("--------------------------------------------------------------------------------------------------------")
+    print("------------------------------------------- LIST OF PATIENTS -------------------------------------------")
+    print("--------------------------------------------------------------------------------------------------------")
     print() 
     header_patients =  format("ID", "10s") + format("Day_C", "10s") + format("Time_C", "20s") + \
                 format("Age", "10s") + format("AcuteLv", "10s") + format("PainLv", "10s") \
