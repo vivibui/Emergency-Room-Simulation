@@ -46,14 +46,14 @@ def NewPatient(p_id, day, t):
 def TimeInER(person): 
     # Set time stay in ER (unit: minutes)
     if person.get_acute_level() == 1: 
-        mean_time = random.randint(0,1200) # up to 20 hours 
+        mean_time = random.randint(1,1200) # up to 20 hours 
     elif person.get_acute_level() == 2: 
-        mean_time = random.randint(0,900) # up to 15 hours 
+        mean_time = random.randint(1,900) # up to 15 hours 
     elif person.get_acute_level() == 3: 
-        mean_time = random.randint(0,600) # up to 10 hours 
+        mean_time = random.randint(1,600) # up to 10 hours 
     elif person.get_acute_level() == 4: 
-        mean_time = random.randint(0,240) # up to 4 hours 
+        mean_time = random.randint(1,240) # up to 4 hours 
     else: 
-        mean_time = random.randint(0,120) # up to 2 hours 
+        mean_time = random.randint(1,120) # up to 2 hours 
     # Set ER time 
     person.set_length_stay_in_ER(mean_time)

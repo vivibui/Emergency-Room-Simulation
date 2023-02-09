@@ -15,7 +15,7 @@ def ReleasePatient(emergency_room, all_patients, day, time, count_release):
         if patient.get_status() == 1:
         # Deduct time staying in ER per treating patient
             patient.deduct_time_in_ER() 
-            if patient.get_length_stay_in_ER() == 0: 
+            if patient.get_length_stay_in_ER() <= 0: 
             # Change status from Treating to Treated 
                 patient.set_status(2)
                 # Update day and time released
@@ -31,7 +31,7 @@ def AssignBed(queue, emergency_room, day, time):
     # Bed is taken 
     emergency_room.bed_taken()
     # Select a person from queue 
-    get_person = qu.SelectFromQueue(queue, emergency_room)        
+    get_person = qu.SelectFromQueue(queue, emergency_room, day, time)        
     # Change status from Waiting to Treating 
     get_person.set_status(1)
     # Set time stay in ER

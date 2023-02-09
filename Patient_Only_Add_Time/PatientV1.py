@@ -10,11 +10,11 @@
 # Acute level: 1-5 
 # Pain level: 1-10 
 # Age: 1-105
-# Status: 0 - Waiting, 1 - Treating, 2 - Treated 
+# Status: 0 - Waiting, 1 - Treating, 2 - Treated, 3 - Leave 
 # Priority Score is calculated in ERSim 
 
 import PersonV1 
-from datetime import time
+from datetime import *
 
 
 class Patient(PersonV1.Person):
@@ -54,27 +54,36 @@ class Patient(PersonV1.Person):
     def get_priority_score(self):
         return self.__priority_score
 
-    def get_time_coming(self):
+    def get_time_coming_str(self):
         if self.__time_coming != None: 
             return self.__time_coming.strftime(" %H:%M")
         else: 
             return "TBD"
 
-    def get_time_admitted(self):
+    def get_time_admitted_str(self):
         if self.__time_admitted != None: 
             return self.__time_admitted.strftime(" %H:%M")
         else: 
             return "TBD"
 
-    def get_time_released(self):
+    def get_time_released_str(self):
         if self.__time_released != None: 
             return self.__time_released.strftime(" %H:%M")
         else: 
             return "TBD"
 
+    def get_time_coming(self): 
+        return self.__time_coming
+
+    def get_time_admitted(self):
+        return self.__time_admitted
+
+    def get_time_released(self):
+        return self.__time_released
+
 
     ################################################   
-    ###################  Set Method ################
+    ################### Set Method #################
 
     def set_priority_score(self, new_score): 
         self.__priority_score = new_score
@@ -104,12 +113,27 @@ class Patient(PersonV1.Person):
         self.__time_released = new_time
 
     ################################################   
+    ###################  Other Method ##############
+
+    def get_wait_time(self, current_day, current_time):
+        current_delta = timedelta(hours = current_time.hour, minutes = current_time.minute)
+        coming_delta = timedelta(hours = self.__time_coming.hour, minutes = self.__time_coming.minute)
+        midnight = time(hour = 0, minute = 0)
+        midnight_delta = timedelta(hours = midnight.hour, minutes = midnight.minute) 
+        if self.__day_coming == current_day: 
+            difference =  current_delta - coming_delta 
+        else: 
+            difference =  current_delta - midnight_delta + coming_delta
+        return difference.total_seconds()/60 
+
+    ################################################   
     #####################  Print ###################
 
     def __str__(self): 
-        return super().__str__()  + format(self.__day_coming, "<10d") + format(self.get_time_coming(), "<20s")\
+        return super().__str__()  + format(self.__day_coming, "<10d") + format(self.get_time_coming_str(), "<20s")\
             + format(self.__age, "<10d") + format(self.__acute_level, "<10d") \
                 + format(self.__pain_level, "<10d") + format(self.__status, "<10d") \
-                    + format(self.__day_admitted, "<10d") + format(self.get_time_admitted(), "<20s") \
-                        + format(self.__day_released, "<10d") + format(self.get_time_released(), "<20s")
+                    + format(self.__day_admitted, "<10d") + format(self.get_time_admitted_str(), "<20s") \
+                        + format(self.__day_released, "<10d") + format(self.get_time_released_str(), "<20s") \
+                            + format(self.__length_stay_in_ER, "<25d") 
      

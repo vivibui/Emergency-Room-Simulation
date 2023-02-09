@@ -6,38 +6,43 @@
 ##                                         ##
 #############################################
 
+import ConfigV1 as cf 
 
 # This is where we (1) create queue and (2) select patient from queue 
 
 
-def CreateQueue(all_patients): 
+def AddQueue(emergency_room): 
+    queue = {} 
     # Queue: a dictionary of ID:priority score of waiting patients 
-    queue = {}  
-    for patient in all_patients: 
+    for patient in emergency_room.get_patients(): 
         if patient.get_status() == 0: 
-            queue[patient.get_id()] = patient.get_priority_score() 
+            queue[int(patient.get_id())] = int(patient.get_priority_score())
     return queue
 
 
 
-def SelectFromQueue(queue, emergency_room):
+def SelectFromQueue(queue, emergency_room, day, time):
     # Waiting ID: a list of ID from queue, sorted ascendingly 
     waiting_ID = list(queue.keys()) 
     waiting_ID.sort() 
+    # Initialize
+    max_wait = 0 
+    max_id = 0 
     # Get patient to assign to bed 
-        # First, base on priority score: the lower the higher the priority 
-        # Second, base on order: the smaller the id the higher the priority 
-        # Third, base on rounds: a person cannot be skipped for more than 2 rounds regardless of priority score      
-    # Third condition: 
-    if len(waiting_ID) >= 2: 
-        if waiting_ID[1] - waiting_ID[0] >= 2: 
-            get_person = emergency_room.get_patient(waiting_ID[0])
-        else: 
-            # First condition and second condition:  
-            min_score = min(queue.values())
-            id_to_select = [id for id in queue if queue[id] == min_score]
-            id_to_select.sort() 
-            get_person = emergency_room.get_patient(id_to_select[0])
-    else: # only one patient waiting
-        get_person = emergency_room.get_patient(waiting_ID[0])
+        # First, a person who has been waiting more than BENCHMARK hour will be prioritized 
+        # Second, base on priority score: the lower the higher the priority 
+        # Third, base on order: the smaller the id the higher the priority 
+    for id in waiting_ID: 
+        person = emergency_room.get_patient(id) 
+        person_wait_time = person.get_wait_time(day, time) 
+        if person_wait_time > max_wait: 
+            max_wait = person_wait_time 
+            max_id = id 
+    if max_wait >= cf.BENCHMARK: 
+        get_person = emergency_room.get_patient(max_id) 
+    else: 
+        min_score = min(queue.values())
+        id_to_select = [id for id in queue if queue[id] == min_score]
+        id_to_select.sort() 
+        get_person = emergency_room.get_patient(id_to_select[0])
     return get_person   

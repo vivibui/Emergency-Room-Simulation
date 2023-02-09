@@ -8,9 +8,10 @@
 
 
 # Export file to CSV
-def ExportCSV(file_name, header, content): 
+def ExportCSV(file_name, content, header=None): 
     write_file = open(file_name, "w")
-    write_file.write(header) 
+    if header != None: 
+        write_file.write(header) 
     write_file.write(content) 
     write_file.close() 
 

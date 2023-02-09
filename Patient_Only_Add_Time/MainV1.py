@@ -13,14 +13,7 @@ import PatientOpsV1 as po
 import EROpsV1 as eo 
 import QueueV1 as qu
 import PrintingV1 as prt
-
-
-# Max days to run simulation 
-MAX_DAYS = 3
-# Max patients coming in an hour  
-MAX_PATIENTS = 4
-# Initial Condition: ER Capacity 
-AVAIL_BEDS = 20
+import ConfigV1 as cf 
 
 
 def main(): 
@@ -28,11 +21,11 @@ def main():
     # Initialize 
     day = 0 
     p_id = 0 
-    emergency_room = EmergencyRoomV1.EmergencyRoom(open_beds = AVAIL_BEDS)
+    emergency_room = EmergencyRoomV1.EmergencyRoom(open_beds = cf.AVAIL_BEDS)
     content_ops = ""  # to export result 
 
     # Loop day 
-    while day < MAX_DAYS: 
+    while day < cf.MAX_DAYS: 
         day += 1 
         h = 0 
         # Print Header 
@@ -41,7 +34,7 @@ def main():
 
         for h in range(24): 
             # Initialize 
-            total_patients_one_hour = random.randint(0,MAX_PATIENTS)
+            total_patients_one_hour = random.randint(0,cf.MAX_PATIENTS)
             all_patients = emergency_room.get_patients()
             minutes_list = [ random.randint(0,60) for i in range(total_patients_one_hour) ]
             count_release = 0
@@ -59,8 +52,8 @@ def main():
 
                 # Loop to arrange patients to available beds 
                 while emergency_room.get_open_beds() > 0 and emergency_room.count_waiting() > 0: 
-                    # Create queue 
-                    queue = qu.CreateQueue(all_patients)
+                    # Add to queue 
+                    queue = qu.AddQueue(emergency_room)
                     # Number of times assigning beds
                     if emergency_room.get_open_beds() > emergency_room.count_waiting(): 
                         times_assign_beds = emergency_room.count_waiting() 
@@ -80,8 +73,8 @@ def main():
     header_patients, content_patients = prt.ListPatients(emergency_room) 
 
     # Write to csv
-    aux.ExportCSV("emergency_ops", header, content_ops)
-    aux.ExportCSV("patients_list", header_patients, content_patients)
+    aux.ExportCSV("emergency_ops", content_ops)
+    aux.ExportCSV("patients_list", content_patients, header_patients)
 
 
 
