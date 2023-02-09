@@ -1,9 +1,4 @@
-#############################################
-##                                         ##
-##        Emegency Room Simulation         ##
-##        Author: Vivian Bui               ##
-##                                         ##
-#############################################
+
 
 import random 
 import datetime 

@@ -1,11 +1,3 @@
-#############################################
-##                                         ##
-##        Emegency Room Simulation         ##
-##        Author: Vivian Bui               ## 
-##        File: Emergency Room Class       ## 
-##                                         ##
-#############################################
-
 
 
 class EmergencyRoom: 

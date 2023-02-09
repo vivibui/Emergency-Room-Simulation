@@ -1,10 +1,4 @@
-#############################################
-##                                         ##
-##        Emegency Room Simulation         ##
-##        Author: Vivian Bui               ## 
-##        File: Config                     ## 
-##                                         ##
-#############################################
+
 
 # Description: store all global variables to be used across modules 
 

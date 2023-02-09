@@ -1,10 +1,4 @@
-#############################################
-##                                         ##
-##        Emegency Room Simulation         ##
-##        Author: Vivian Bui               ## 
-##        File: Queue                      ## 
-##                                         ##
-#############################################
+
 
 import ConfigV1 as cf 
 

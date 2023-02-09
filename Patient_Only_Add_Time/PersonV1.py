@@ -1,10 +1,4 @@
-#############################################
-##                                         ##
-##        Emegency Room Simulation         ##
-##        Author: Vivian Bui               ## 
-##        File: Person Class               ## 
-##                                         ##
-#############################################
+
 
 # ID is an integer 
 # Code is a string 

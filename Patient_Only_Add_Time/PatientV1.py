@@ -1,11 +1,3 @@
-#############################################
-##                                         ##
-##        Emegency Room Simulation         ##
-##        Author: Vivian Bui               ## 
-##        File: Patient Class              ## 
-##                                         ##
-#############################################
-
 
 # Acute level: 1-5 
 # Pain level: 1-10 

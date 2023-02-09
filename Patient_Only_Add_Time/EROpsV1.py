@@ -1,10 +1,3 @@
-#############################################
-##                                         ##
-##        Emegency Room Simulation         ##
-##        Author: Vivian Bui               ## 
-##        File: ER Operation               ## 
-##                                         ##
-#############################################
 
 import PatientOpsV1 as po 
 import QueueV1 as qu 

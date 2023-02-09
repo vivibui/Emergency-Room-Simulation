@@ -1,10 +1,3 @@
-#############################################
-##                                         ##
-##        Emegency Room Simulation         ##
-##        Author: Vivian Bui               ## 
-##        File: Patient Operation          ## 
-##                                         ##
-#############################################
 
 
 import random 

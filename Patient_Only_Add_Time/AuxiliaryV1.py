@@ -1,10 +1,3 @@
-#############################################
-##                                         ##
-##        Emegency Room Simulation         ##
-##        Author: Vivian Bui               ## 
-##        File: Auxiliary Functions        ## 
-##                                         ##
-#############################################
 
 
 # Export file to CSV
