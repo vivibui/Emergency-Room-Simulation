@@ -134,13 +134,11 @@ class Patient(PersonV1.Person):
     def calc_wait_time(self, current_day, current_time):
         current_delta = timedelta(hours = current_time.hour, minutes = current_time.minute)
         coming_delta = timedelta(hours = self.__time_coming.hour, minutes = self.__time_coming.minute)
-        midnight = time(hour = 0, minute = 0)
-        midnight_delta = timedelta(hours = midnight.hour, minutes = midnight.minute) 
         if self.__day_coming == current_day: 
             difference =  current_delta - coming_delta 
             return difference.total_seconds()/60 
         else: 
-            difference =  (current_delta - midnight_delta).total_seconds()/60 + (24*60 - int(coming_delta.total_seconds()/60))
+            difference =  (current_delta).total_seconds()/60 + (24*60 - int(coming_delta.total_seconds()/60))
             return difference 
         
 
