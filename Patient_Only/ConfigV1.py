@@ -6,7 +6,7 @@
 MAX_DAYS = 3
 # Max patients coming in an hour  
     # the larger the number, the easier to check for LWBS, wait time, and satisfaction calculation 
-MAX_PATIENTS = 8  
+MAX_PATIENTS = 5 
 # Initial Condition: ER Capacity 
 AVAIL_BEDS = 15
 # Benchmark of wait time 

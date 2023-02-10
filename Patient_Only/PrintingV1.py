@@ -59,6 +59,10 @@ def ListSF(emergency_room):
                 total_patients_day += 1 
                 total_SF_day += patient.get_satisfaction_score() 
         avg_SF_day = round(total_SF_day/total_patients_day,2) 
+        # Print 
         print(f'Day {day}: {avg_SF_day}') 
         content_SF += "Day " + str(day) + "| " + str(avg_SF_day) + "\n"
+        # Reset 
+        total_patients_day = 0 
+        total_SF_day = 0 
     return content_SF 

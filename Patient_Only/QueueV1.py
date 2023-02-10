@@ -5,10 +5,10 @@ import ConfigV1 as cf
 # This is where we (1) create queue and (2) select patient from queue 
 
 
-def AddQueue(emergency_room): 
+def AddQueue(all_patients): 
     queue = {} 
     # Queue: a dictionary of ID:priority score of waiting patients 
-    for patient in emergency_room.get_patients(): 
+    for patient in all_patients: 
         if patient.get_status() == 0: 
             queue[int(patient.get_id())] = int(patient.get_priority_score())
     return queue

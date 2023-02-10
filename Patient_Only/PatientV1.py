@@ -70,8 +70,8 @@ class Patient(PersonV1.Person):
 
     def get_time_released_str(self):
         if self.get_status() != 3: 
-            if self.__time_admitted != None: 
-                return self.__time_admitted.strftime(" %H:%M")
+            if self.__time_released != None: 
+                return self.__time_released.strftime(" %H:%M")
             else: 
                 return "TBD"
         else: 

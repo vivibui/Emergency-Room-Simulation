@@ -12,7 +12,7 @@ import PrintingV1 as prt
 import ConfigV1 as cf 
 
 # TESTING: Uncomment set seed for testing purpose
-random.seed(10000) 
+random.seed(100) 
 
 def main(): 
     
@@ -54,7 +54,7 @@ def main():
                 # Loop to arrange patients to available beds 
                 while emergency_room.get_open_beds() > 0 and emergency_room.count_waiting() > 0: 
                     # Add to queue 
-                    queue = qu.AddQueue(emergency_room)
+                    queue = qu.AddQueue(all_patients)
                     # Number of times assigning beds
                     if emergency_room.get_open_beds() > emergency_room.count_waiting(): 
                         times_assign_beds = emergency_room.count_waiting() 
