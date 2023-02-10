@@ -2,7 +2,7 @@
 # Acute level: 1-5 
 # Pain level: 1-10 
 # Age: 1-105
-# Status: 0 - Waiting, 1 - Treating, 2 - Treated, 3 - Leave 
+# Status: 0 - Waiting, 1 - Treating, 2 - Treated, 3 - Leave before treatment 
 # Priority Score is calculated in ERSim 
 
 import PersonV1 
@@ -24,6 +24,9 @@ class Patient(PersonV1.Person):
         self.__time_admitted = None
         self.__day_released = 0 # in day 
         self.__time_released = None
+        self.__total_wait_time = 0 
+        # Note: total_wait_time attribute stores the total minutes a patient have waited before getting treatment
+        # Cal_wait_time method returns the wait time at any point of time argument 
 
     ################################################   
     ###################  Get Method ################
@@ -72,6 +75,9 @@ class Patient(PersonV1.Person):
 
     def get_time_released(self):
         return self.__time_released
+    
+    def get_total_wait_time(self): 
+        return self.__total_wait_time
 
 
     ################################################   
@@ -103,20 +109,25 @@ class Patient(PersonV1.Person):
     
     def set_time_released(self, new_time): 
         self.__time_released = new_time
+    
+    def set_total_wait_time(self, new_time): 
+        self.__total_wait_time = new_time 
 
     ################################################   
     ###################  Other Method ##############
 
-    def get_wait_time(self, current_day, current_time):
+    def calc_wait_time(self, current_day, current_time):
         current_delta = timedelta(hours = current_time.hour, minutes = current_time.minute)
         coming_delta = timedelta(hours = self.__time_coming.hour, minutes = self.__time_coming.minute)
         midnight = time(hour = 0, minute = 0)
         midnight_delta = timedelta(hours = midnight.hour, minutes = midnight.minute) 
         if self.__day_coming == current_day: 
             difference =  current_delta - coming_delta 
+            return difference.total_seconds()/60 
         else: 
-            difference =  current_delta - midnight_delta + coming_delta
-        return difference.total_seconds()/60 
+            difference =  (current_delta - midnight_delta).total_seconds()/60 + (24*60 - int(coming_delta.total_seconds()/60))
+            return difference 
+        
 
     ################################################   
     #####################  Print ###################
@@ -127,5 +138,5 @@ class Patient(PersonV1.Person):
                 + format(self.__pain_level, "<10d") + format(self.__status, "<10d") \
                     + format(self.__day_admitted, "<10d") + format(self.get_time_admitted_str(), "<20s") \
                         + format(self.__day_released, "<10d") + format(self.get_time_released_str(), "<20s") \
-                            + format(self.__length_stay_in_ER, "<25d") 
+                            + format(self.__length_stay_in_ER, "<20d") + format(self.__total_wait_time, "<20d")
      

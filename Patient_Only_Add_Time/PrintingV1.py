@@ -28,7 +28,8 @@ def ListPatients(emergency_room):
     header_patients =  format("ID", "10s") + format("Day_C", "10s") + format("Time_C", "20s") + \
                 format("Age", "10s") + format("AcuteLv", "10s") + format("PainLv", "10s") \
                 + format("Status", "10s") + format("Day_A", "10s") + format("Time_A", "20s") \
-                    + format("Day_R", "10s") + format("Time_R", "20s") + format("Time_in_ER", "25s") + "\n"
+                    + format("Day_R", "10s") + format("Time_R", "20s") + format("Time_Left_In_ER", "20s") + \
+                        format("Total_Wait_Time", "20s") + "\n"
     print(header_patients)
     print()
     for patient in emergency_room.get_patients(): 

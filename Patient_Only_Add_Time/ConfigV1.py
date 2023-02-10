@@ -9,4 +9,6 @@ MAX_PATIENTS = 5
 # Initial Condition: ER Capacity 
 AVAIL_BEDS = 15
 # Benchmark of wait time 
-BENCHMARK = 300 # minutes 
+BENCHMARK_W = 100 # minutes 
+# Benchmark to leave the ER 
+BENCHMARK_L = 300 # minutes 

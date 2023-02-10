@@ -7,7 +7,6 @@ import PatientV1
 def PriorityScore(patient): 
     # Priority order: Acute level -> Age 
     # The lower the score, the higher priority the patient is 
-
     # Acute Level
     score = 0
     score += patient.get_acute_level()
@@ -21,11 +20,10 @@ def PriorityScore(patient):
     return score 
 
 
-
 def NewPatient(p_id, day, t): 
     p_age = random.randint(1,100) # Max age is 100
     p_acute_level = random.randint(1,5)
-    p_pain_level = random.randint(1,10)
+    p_pain_level = random.randint(0,10) 
     p_code = "P"
     p_day_coming = day 
     p_new_patient = PatientV1.Patient(code = p_code, id = p_id, age = p_age, acute_level = p_acute_level, pain_level = p_pain_level, day_coming = p_day_coming)
@@ -33,7 +31,6 @@ def NewPatient(p_id, day, t):
     p_new_patient.set_priority_score(p_priority_score)
     p_new_patient.set_time_coming(t)
     return p_new_patient 
-
 
 
 def TimeInER(person): 
@@ -50,3 +47,6 @@ def TimeInER(person):
         mean_time = random.randint(1,120) # up to 2 hours 
     # Set ER time 
     person.set_length_stay_in_ER(mean_time)
+
+
+            

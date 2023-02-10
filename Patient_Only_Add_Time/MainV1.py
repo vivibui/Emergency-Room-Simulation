@@ -10,6 +10,8 @@ import QueueV1 as qu
 import PrintingV1 as prt
 import ConfigV1 as cf 
 
+# TESTING: Uncomment set seed for testing purpose
+random.seed(10000) 
 
 def main(): 
     

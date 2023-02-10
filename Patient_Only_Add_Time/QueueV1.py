@@ -28,11 +28,11 @@ def SelectFromQueue(queue, emergency_room, day, time):
         # Third, base on order: the smaller the id the higher the priority 
     for id in waiting_ID: 
         person = emergency_room.get_patient(id) 
-        person_wait_time = person.get_wait_time(day, time) 
+        person_wait_time = person.calc_wait_time(day, time) 
         if person_wait_time > max_wait: 
             max_wait = person_wait_time 
             max_id = id 
-    if max_wait >= cf.BENCHMARK: 
+    if max_wait >= cf.BENCHMARK_W: 
         get_person = emergency_room.get_patient(max_id) 
     else: 
         min_score = min(queue.values())
