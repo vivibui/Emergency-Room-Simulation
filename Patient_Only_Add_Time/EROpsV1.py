@@ -2,8 +2,7 @@
 
 import PatientOpsV1 as po 
 import QueueV1 as qu 
-import ConfigV1 as cf 
-
+import Satisfaction as sf 
 
 def ReleasePatient(emergency_room, all_patients, day, time, count_release): 
     # Loop to release patients from beds 
@@ -38,6 +37,9 @@ def AssignBed(queue, emergency_room, day, time):
     # Set total wait time 
     total_wait_time = get_person.calc_wait_time(day, time)
     get_person.set_total_wait_time(int(total_wait_time))
+    # Calculate satisfaction score 
+    score = sf.CalSatisfaction(get_person)
+    get_person.set_satisfaction_score(score) 
     # Remove selected patient from queue and waiting ID 
     del queue[get_person.get_id()]
 

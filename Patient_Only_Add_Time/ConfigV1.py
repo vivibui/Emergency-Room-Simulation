@@ -10,5 +10,7 @@ MAX_PATIENTS = 5
 AVAIL_BEDS = 15
 # Benchmark of wait time 
 BENCHMARK_W = 100 # minutes 
-# Benchmark to leave the ER 
+# Benchmark of wait time before the satisfaction score started to get deducted (METHOD 2)
+BENCHMARK_D = 30
+# Benchmark of wait time when patient decide whether to leave the ER 
 BENCHMARK_L = 300 # minutes 

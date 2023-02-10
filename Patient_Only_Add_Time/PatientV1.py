@@ -27,6 +27,7 @@ class Patient(PersonV1.Person):
         self.__total_wait_time = 0 
         # Note: total_wait_time attribute stores the total minutes a patient have waited before getting treatment
         # Cal_wait_time method returns the wait time at any point of time argument 
+        self.__satisfaction_score = 0 
 
     ################################################   
     ###################  Get Method ################
@@ -79,6 +80,8 @@ class Patient(PersonV1.Person):
     def get_total_wait_time(self): 
         return self.__total_wait_time
 
+    def get_satisfaction_score(self): 
+        return self.__satisfaction_score
 
     ################################################   
     ################### Set Method #################
@@ -113,6 +116,9 @@ class Patient(PersonV1.Person):
     def set_total_wait_time(self, new_time): 
         self.__total_wait_time = new_time 
 
+    def set_satisfaction_score(self, new_score): 
+        self.__satisfaction_score = new_score 
+
     ################################################   
     ###################  Other Method ##############
 
@@ -138,5 +144,6 @@ class Patient(PersonV1.Person):
                 + format(self.__pain_level, "<10d") + format(self.__status, "<10d") \
                     + format(self.__day_admitted, "<10d") + format(self.get_time_admitted_str(), "<20s") \
                         + format(self.__day_released, "<10d") + format(self.get_time_released_str(), "<20s") \
-                            + format(self.__length_stay_in_ER, "<20d") + format(self.__total_wait_time, "<20d")
+                            + format(self.__length_stay_in_ER, "<20d") + format(self.__total_wait_time, "<20d") \
+                                + format(self.__satisfaction_score, "<15.2f") 
      
