@@ -19,14 +19,11 @@ class EmergencyRoom:
     def bed_taken(self):
         self.__open_beds -= 1 
     
-    def bed_release(self): 
+    def bed_discharged(self): 
         self.__open_beds += 1 
 
     def count_patients(self):
-        count = 0 
-        for patient in self.__patients: 
-            count+=1 
-        return count
+        return len(self.__patients)
 
     def count_waiting(self):
         count_waiting = 0 

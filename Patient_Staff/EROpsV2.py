@@ -5,7 +5,7 @@ import QueueV2 as qu
 import SatisfactionV2 as sf 
 import ConfigV2 as cf 
 
-def ReleasePatient(emergency_room, all_patients, day, time, count_release): 
+def ReleasePatient(emergency_room, all_patients, day, time, count_discharged): 
     # Loop to release patients from beds 
     for patient in all_patients: 
         if patient.get_status() == 1:
@@ -15,12 +15,12 @@ def ReleasePatient(emergency_room, all_patients, day, time, count_release):
             # Change status from Treating to Treated 
                 patient.set_status(2)
                 # Update day and time released
-                patient.set_time_released(time)
-                patient.set_day_released(day)
+                patient.set_time_discharged(time)
+                patient.set_day_discharged(day)
                 # Release a bed 
-                emergency_room.bed_release()
-                count_release +=1
-    return emergency_room, count_release 
+                emergency_room.bed_discharged()
+                count_discharged +=1
+    return emergency_room, count_discharged
     
 
 def LWBS(all_patients, day, time): 
@@ -40,9 +40,9 @@ def AssignBed(queue, emergency_room, day, time):
     get_person.set_status(1)
     # Set time stay in ER
     po.TimeInER(get_person)
-    # Set day and time admitted 
-    get_person.set_time_admitted(time)
-    get_person.set_day_admitted(day)
+    # Set day and time the patient receive a bed 
+    get_person.set_time_assigned(time)
+    get_person.set_day_assigned(day)
     # Set total wait time 
     total_wait_time = get_person.calc_wait_time(day, time)
     get_person.set_total_wait_time(int(total_wait_time))

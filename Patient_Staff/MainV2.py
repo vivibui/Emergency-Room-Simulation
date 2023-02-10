@@ -3,7 +3,7 @@
 import random 
 import datetime 
 
-import EmergencyRoomV2 
+import EmergencyRoomV2
 import AuxiliaryV2 as aux 
 import PatientOpsV2 as po 
 import EROpsV2 as eo 
@@ -35,7 +35,7 @@ def main():
             total_patients_one_hour = random.randint(0,cf.MAX_PATIENTS)
             all_patients = emergency_room.get_patients()
             minutes_list = [ random.randint(0,60) for i in range(total_patients_one_hour) ]
-            count_release = 0
+            count_discharged = 0
 
             for m in range(60): 
                 time = datetime.time(hour = h, minute = m) 
@@ -45,8 +45,8 @@ def main():
                     # Pass list of new patients today to the Emergency Room 
                     all_patients.append(po.NewPatient(p_id, day, time)) 
                
-                # Release patient 
-                emergency_room, count_release = eo.ReleasePatient(emergency_room, all_patients, day, time, count_release)
+                # Discharge patient 
+                emergency_room, count_discharged = eo.ReleasePatient(emergency_room, all_patients, day, time, count_discharged)
 
                 # Patients LWBS 
                 eo.LWBS(all_patients, day, time)
@@ -65,7 +65,7 @@ def main():
                         emergency_room, queue = eo.AssignBed(queue, emergency_room, day, time)
 
             # Print Output 
-            output = prt.LogOutput(emergency_room, total_patients_one_hour, h, count_release)
+            output = prt.LogOutput(emergency_room, total_patients_one_hour, h, count_discharged)
 
             # To write Emergency Operations to csv
             content_ops += output + "\n"

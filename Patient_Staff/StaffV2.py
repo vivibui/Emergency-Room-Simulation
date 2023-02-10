@@ -1,7 +1,7 @@
 
 
 # Status: 0 - Idle, 1 - Treating 
-# Spec: key 
+# Spec: specialization 
 
 import PersonV2
 
