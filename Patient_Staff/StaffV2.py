@@ -1,11 +1,3 @@
-#############################################
-##                                         ##
-##        Emegency Room Simulation         ##
-##        Author: Vivian Bui               ## 
-##        File: Staff Class                ## 
-##        Last updated: 12/26/2022         ##
-##                                         ##
-#############################################
 
 
 # Status: 0 - Idle, 1 - Treating 

@@ -1,4 +1,4 @@
-ID          Day_C     Time_C              Age       AcuteLv   PainLv    Status    Day_A     Time_A              Day_R     Time_R              Time_Left_In_ER     Total_Wait_Time     SF_Score       
+ID          Day_C     Time_C              Age       AcuteLv   PainLv    Status    Day_A     Time_A              Day_D     Time_D              Time_Left_In_ER     Total_Wait_Time     SF_Score       
 1           1          00:29              59        2         6         2         1          00:29              1          12:59              0                   0                   5.00           
 2           1          01:27              15        5         1         2         1          01:27              1          01:38              0                   0                   5.00           
 3           1          01:32              95        4         4         2         1          01:32              1          01:45              0                   0                   5.00           

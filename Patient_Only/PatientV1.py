@@ -20,12 +20,12 @@ class Patient(PersonV1.Person):
         self.__status = 0
         self.__length_stay_in_ER = 0 # in minutes 
         self.__priority_score = 0
-        self.__day_admitted = 0 # in day
-        self.__time_admitted = None
-        self.__day_released = 0 # in day 
-        self.__time_released = None
+        self.__day_assigned = 0 # in day
+        self.__time_assigned = None
+        self.__day_discharged = 0 # in day 
+        self.__time_discharged = None
         self.__total_wait_time = 0 
-        # Note: total_wait_time attribute stores the total minutes a patient have waited before getting treatment
+        # Note: total_wait_time attribute stores the total minutes a patient have waited before getting a bed 
         # Cal_wait_time method returns the wait time at any point of time argument 
         self.__satisfaction_score = 0 
 
@@ -59,19 +59,19 @@ class Patient(PersonV1.Person):
         else: 
             return "TBD"
 
-    def get_time_admitted_str(self):
+    def get_time_assigned_str(self):
         if self.get_status() != 3: 
-            if self.__time_admitted != None: 
-                return self.__time_admitted.strftime(" %H:%M")
+            if self.__time_assigned != None: 
+                return self.__time_assigned.strftime(" %H:%M")
             else: 
                 return "TBD"
         else: 
             return "LWBS"
 
-    def get_time_released_str(self):
+    def get_time_discharged_str(self):
         if self.get_status() != 3: 
-            if self.__time_released != None: 
-                return self.__time_released.strftime(" %H:%M")
+            if self.__time_discharged != None: 
+                return self.__time_discharged.strftime(" %H:%M")
             else: 
                 return "TBD"
         else: 
@@ -80,11 +80,11 @@ class Patient(PersonV1.Person):
     def get_time_coming(self): 
         return self.__time_coming
 
-    def get_time_admitted(self):
-        return self.__time_admitted
+    def get_time_assigned(self):
+        return self.__time_assigned
 
     def get_time_released(self):
-        return self.__time_released
+        return self.__time_discharged
     
     def get_total_wait_time(self): 
         return self.__total_wait_time
@@ -110,17 +110,17 @@ class Patient(PersonV1.Person):
     def set_time_coming(self, new_time): 
         self.__time_coming = new_time 
 
-    def set_time_admitted(self, new_time): 
-        self.__time_admitted = new_time
+    def set_time_assigned(self, new_time): 
+        self.__time_assigned = new_time
 
-    def set_day_admitted(self, day): 
-        self.__day_admitted = day 
+    def set_day_assigned(self, day): 
+        self.__day_assigned = day 
 
-    def set_day_released(self, day): 
-        self.__day_released = day 
+    def set_day_discharged(self, day): 
+        self.__day_discharged= day 
     
-    def set_time_released(self, new_time): 
-        self.__time_released = new_time
+    def set_time_discharged(self, new_time): 
+        self.__time_discharged = new_time
     
     def set_total_wait_time(self, new_time): 
         self.__total_wait_time = new_time 
@@ -149,8 +149,8 @@ class Patient(PersonV1.Person):
         return super().__str__()  + format(self.__day_coming, "<10d") + format(self.get_time_coming_str(), "<20s")\
             + format(self.__age, "<10d") + format(self.__acute_level, "<10d") \
                 + format(self.__pain_level, "<10d") + format(self.__status, "<10d") \
-                    + format(self.__day_admitted, "<10d") + format(self.get_time_admitted_str(), "<20s") \
-                        + format(self.__day_released, "<10d") + format(self.get_time_released_str(), "<20s") \
+                    + format(self.__day_assigned, "<10d") + format(self.get_time_assigned_str(), "<20s") \
+                        + format(self.__day_discharged, "<10d") + format(self.get_time_discharged_str(), "<20s") \
                             + format(self.__length_stay_in_ER, "<20d") + format(self.__total_wait_time, "<20d") \
                                 + format(self.__satisfaction_score, "<15.2f") 
      

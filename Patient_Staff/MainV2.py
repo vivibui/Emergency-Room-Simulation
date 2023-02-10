@@ -3,13 +3,13 @@
 import random 
 import datetime 
 
-import EmergencyRoomV1 
-import AuxiliaryV1 as aux 
-import PatientOpsV1 as po 
-import EROpsV1 as eo 
-import QueueV1 as qu
-import PrintingV1 as prt
-import ConfigV1 as cf 
+import EmergencyRoomV2 
+import AuxiliaryV2 as aux 
+import PatientOpsV2 as po 
+import EROpsV2 as eo 
+import QueueV2 as qu
+import PrintingV2 as prt
+import ConfigV2 as cf 
 
 # TESTING: Uncomment set seed for testing purpose
 random.seed(100) 
@@ -19,7 +19,7 @@ def main():
     # Initialize 
     day = 0 
     p_id = 0 
-    emergency_room = EmergencyRoomV1.EmergencyRoom(open_beds = cf.AVAIL_BEDS)
+    emergency_room = EmergencyRoomV2.EmergencyRoom(open_beds = cf.AVAIL_BEDS)
     content_ops = ""  # to export result 
 
     # Loop day 
@@ -35,7 +35,7 @@ def main():
             total_patients_one_hour = random.randint(0,cf.MAX_PATIENTS)
             all_patients = emergency_room.get_patients()
             minutes_list = [ random.randint(0,60) for i in range(total_patients_one_hour) ]
-            count_discharged = 0
+            count_release = 0
 
             for m in range(60): 
                 time = datetime.time(hour = h, minute = m) 
@@ -45,8 +45,8 @@ def main():
                     # Pass list of new patients today to the Emergency Room 
                     all_patients.append(po.NewPatient(p_id, day, time)) 
                
-                # Discharge patient 
-                emergency_room, count_discharged = eo.ReleasePatient(emergency_room, all_patients, day, time, count_discharged)
+                # Release patient 
+                emergency_room, count_release = eo.ReleasePatient(emergency_room, all_patients, day, time, count_release)
 
                 # Patients LWBS 
                 eo.LWBS(all_patients, day, time)
@@ -65,7 +65,7 @@ def main():
                         emergency_room, queue = eo.AssignBed(queue, emergency_room, day, time)
 
             # Print Output 
-            output = prt.LogOutput(emergency_room, total_patients_one_hour, h, count_discharged)
+            output = prt.LogOutput(emergency_room, total_patients_one_hour, h, count_release)
 
             # To write Emergency Operations to csv
             content_ops += output + "\n"

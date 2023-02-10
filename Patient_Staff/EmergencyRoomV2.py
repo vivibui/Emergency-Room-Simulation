@@ -1,18 +1,8 @@
-#############################################
-##                                         ##
-##        Emegency Room Simulation         ##
-##        Author: Vivian Bui               ## 
-##        File: Emergency Room Class       ## 
-##        Last updated: 12/26/2022         ##
-##                                         ##
-#############################################
-
 
 
 class EmergencyRoom: 
     def __init__(self, **kwargs): 
         self.__patients = []
-        self.__total_beds = kwargs['total_beds']
         self.__open_beds = kwargs['open_beds']
 
     def get_patients(self): 
@@ -22,9 +12,6 @@ class EmergencyRoom:
         for patient in self.__patients: 
             if id == patient.get_id(): 
                 return patient 
-    
-    def get_total_beds(self): 
-        return self.__total_beds 
     
     def get_open_beds(self): 
         return self.__open_beds
@@ -61,4 +48,8 @@ class EmergencyRoom:
             if patient.get_status() == 2: 
                 count_treated +=1 
         return count_treated 
-                
+
+    def __str__(self):
+        return format(self.get_open_beds(), "<18d") \
+                 + format(self.count_waiting(), "<12d") + format(self.count_treating(), "<12d") \
+                 + format(self.count_treated(), "<12d")

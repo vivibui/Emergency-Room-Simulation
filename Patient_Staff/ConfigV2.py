@@ -13,5 +13,5 @@ AVAIL_BEDS = 15
 BENCHMARK_W = 100 # minutes 
 # Benchmark of wait time before the satisfaction score started to get deducted (METHOD 2)
 BENCHMARK_D = 30
-# Benchmark of wait time when patient decide to leave the ER 
+# Benchmark of wait time when patient decide whether to leave the ER 
 BENCHMARK_L = 125 + BENCHMARK_D # remove BENCHMARK_D if using method 1 for SF Calculation 
