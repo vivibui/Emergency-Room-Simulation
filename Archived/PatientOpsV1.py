@@ -1,3 +1,10 @@
+#############################################
+##                                         ##
+##        Emegency Room Simulation         ##
+##        Author: Vivian Bui               ## 
+##        File: Patient Operation          ## 
+##                                         ##
+#############################################
 
 
 import random 
@@ -7,6 +14,7 @@ import PatientV1
 def PriorityScore(patient): 
     # Priority order: Acute level -> Age 
     # The lower the score, the higher priority the patient is 
+
     # Acute Level
     score = 0
     score += patient.get_acute_level()
@@ -20,33 +28,31 @@ def PriorityScore(patient):
     return score 
 
 
-def NewPatient(p_id, day, t): 
+
+def NewPatient(p_id, t): 
     p_age = random.randint(1,100) # Max age is 100
     p_acute_level = random.randint(1,5)
-    p_pain_level = random.randint(0,10) 
+    p_pain_level = random.randint(1,10)
     p_code = "P"
-    p_day_coming = day 
-    p_new_patient = PatientV1.Patient(code = p_code, id = p_id, age = p_age, acute_level = p_acute_level, pain_level = p_pain_level, day_coming = p_day_coming)
+    p_time_coming = t
+    p_new_patient = PatientV1.Patient(code = p_code, id = p_id, age = p_age, acute_level = p_acute_level, pain_level = p_pain_level, time_coming = p_time_coming)
     p_priority_score = PriorityScore(p_new_patient)
     p_new_patient.set_priority_score(p_priority_score)
-    p_new_patient.set_time_coming(t)
     return p_new_patient 
 
 
+
 def TimeInER(person): 
-    # Set time stay in ER (unit: minutes)
+    # Set time stay in ER based on pain level
     if person.get_acute_level() == 1: 
-        mean_time = random.randint(1,1200) # up to 20 hours 
+        mean_time = 5
     elif person.get_acute_level() == 2: 
-        mean_time = random.randint(1,900) # up to 15 hours 
+        mean_time = 4
     elif person.get_acute_level() == 3: 
-        mean_time = random.randint(1,600) # up to 10 hours 
+        mean_time = 3
     elif person.get_acute_level() == 4: 
-        mean_time = random.randint(1,240) # up to 4 hours 
+        mean_time = 2
     else: 
-        mean_time = random.randint(1,120) # up to 2 hours 
+        mean_time = 1 
     # Set ER time 
-    person.set_length_stay_in_ER(mean_time)
-
-
-            
+    person.set_time_in_ER(mean_time)

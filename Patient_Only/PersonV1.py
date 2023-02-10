@@ -1,10 +1,4 @@
-#############################################
-##                                         ##
-##        Emegency Room Simulation         ##
-##        Author: Vivian Bui               ## 
-##        File: Person Class               ## 
-##                                         ##
-#############################################
+
 
 # ID is an integer 
 # Code is a string 
@@ -29,4 +23,4 @@ class Person:
     #####################  Print ###################
 
     def __str__(self): 
-        return format(self.__id, "<10d")
+        return format(self.__id, "<12d")
