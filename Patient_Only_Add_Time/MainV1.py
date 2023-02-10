@@ -48,6 +48,9 @@ def main():
                 # Release patient 
                 emergency_room, count_release = eo.ReleasePatient(emergency_room, all_patients, day, time, count_release)
 
+                # Patients LWBS 
+                eo.LWBS(all_patients, day, time)
+
                 # Loop to arrange patients to available beds 
                 while emergency_room.get_open_beds() > 0 and emergency_room.count_waiting() > 0: 
                     # Add to queue 
@@ -70,10 +73,13 @@ def main():
     # Print Patients
     header_patients, content_patients = prt.ListPatients(emergency_room) 
 
+    # Print Satisfaction Report 
+    content_SF = prt.ListSF(emergency_room)
+
     # Write to csv
     aux.ExportCSV("emergency_ops", content_ops)
     aux.ExportCSV("patients_list", content_patients, header_patients)
-
+    aux.ExportCSV("satisfaction_report", content_SF) 
 
 
 if __name__ == '__main__':

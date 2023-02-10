@@ -3,6 +3,7 @@
 import PatientOpsV1 as po 
 import QueueV1 as qu 
 import Satisfaction as sf 
+import ConfigV1 as cf 
 
 def ReleasePatient(emergency_room, all_patients, day, time, count_release): 
     # Loop to release patients from beds 
@@ -21,6 +22,14 @@ def ReleasePatient(emergency_room, all_patients, day, time, count_release):
                 count_release +=1
     return emergency_room, count_release 
     
+
+def LWBS(all_patients, day, time): 
+    for patient in all_patients: 
+        if patient.get_status() == 0 and patient.calc_wait_time(day,time) >= cf.BENCHMARK_L: 
+            patient.set_status(3) 
+            patient.set_total_wait_time(cf.BENCHMARK_L) 
+            patient.set_satisfaction_score(0)
+
 
 def AssignBed(queue, emergency_room, day, time): 
     # Bed is taken 

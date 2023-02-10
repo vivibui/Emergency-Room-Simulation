@@ -2,7 +2,7 @@
 # Acute level: 1-5 
 # Pain level: 1-10 
 # Age: 1-105
-# Status: 0 - Waiting, 1 - Treating, 2 - Treated, 3 - Leave before treatment 
+# Status: 0 - Waiting, 1 - Treating, 2 - Treated, 3 - LWBS
 # Priority Score is calculated in ERSim 
 
 import PersonV1 
@@ -50,6 +50,9 @@ class Patient(PersonV1.Person):
     def get_priority_score(self):
         return self.__priority_score
 
+    def get_day_coming(self): 
+        return self.__day_coming
+
     def get_time_coming_str(self):
         if self.__time_coming != None: 
             return self.__time_coming.strftime(" %H:%M")
@@ -57,16 +60,22 @@ class Patient(PersonV1.Person):
             return "TBD"
 
     def get_time_admitted_str(self):
-        if self.__time_admitted != None: 
-            return self.__time_admitted.strftime(" %H:%M")
+        if self.get_status() != 3: 
+            if self.__time_admitted != None: 
+                return self.__time_admitted.strftime(" %H:%M")
+            else: 
+                return "TBD"
         else: 
-            return "TBD"
+            return "LWBS"
 
     def get_time_released_str(self):
-        if self.__time_released != None: 
-            return self.__time_released.strftime(" %H:%M")
+        if self.get_status() != 3: 
+            if self.__time_admitted != None: 
+                return self.__time_admitted.strftime(" %H:%M")
+            else: 
+                return "TBD"
         else: 
-            return "TBD"
+            return "LWBS"
 
     def get_time_coming(self): 
         return self.__time_coming
