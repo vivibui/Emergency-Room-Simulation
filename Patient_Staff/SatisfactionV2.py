@@ -9,11 +9,11 @@ import ConfigV2 as cf
 # Pain Level converts into points deduction 
 def DeductionPoints(pain_level): 
     FACTOR = cf.MAX_WAIT/125 # (*)
-    d_point = 0.1*FACTOR # lowest deduction point 
+    d_point = (0.1/FACTOR) # lowest deduction point 
     for i in range(0,11): 
         if pain_level == i: 
             return d_point
-        d_point += 0.01*FACTOR
+        d_point += (0.01/FACTOR)
 
 # (*) About FACTOR: Refer to the whitepaper to see how FACTOR is determined 
 
