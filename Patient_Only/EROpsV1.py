@@ -2,7 +2,7 @@
 
 import PatientOpsV1 as po 
 import QueueV1 as qu 
-import Satisfaction as sf 
+import SatisfactionV1 as sf 
 import ConfigV1 as cf 
 
 def ReleasePatient(emergency_room, all_patients, day, time, count_discharged): 

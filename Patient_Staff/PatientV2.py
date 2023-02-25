@@ -83,7 +83,7 @@ class Patient(PersonV2.Person):
     def get_time_assigned(self):
         return self.__time_assigned
 
-    def get_time_released(self):
+    def get_time_discharged(self):
         return self.__time_discharged
     
     def get_total_wait_time(self): 
@@ -135,11 +135,10 @@ class Patient(PersonV2.Person):
         current_delta = timedelta(hours = current_time.hour, minutes = current_time.minute)
         coming_delta = timedelta(hours = self.__time_coming.hour, minutes = self.__time_coming.minute)
         if self.__day_coming == current_day: 
-            difference =  current_delta - coming_delta 
-            return difference.total_seconds()/60 
+            difference =  (current_delta - coming_delta ).total_seconds()/60 
         else: 
             difference =  (current_delta).total_seconds()/60 + (24*60 - int(coming_delta.total_seconds()/60))
-            return difference 
+        return difference 
         
 
     ################################################   
