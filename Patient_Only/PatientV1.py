@@ -145,11 +145,12 @@ class Patient(PersonV1.Person):
     #####################  Print ###################
 
     def __str__(self): 
-        return super().__str__()  + format(self.__day_coming, "<10d") + format(self.get_time_coming_str(), "<20s")\
+        return super().__str__()  + format(self.__day_coming, "<10d") + format(self.get_time_coming_str(), "<12s")\
             + format(self.__age, "<10d") + format(self.__acute_level, "<10d") \
-                + format(self.__pain_level, "<10d") + format(self.__status, "<10d") \
-                    + format(self.__day_assigned, "<10d") + format(self.get_time_assigned_str(), "<20s") \
-                        + format(self.__day_discharged, "<10d") + format(self.get_time_discharged_str(), "<20s") \
+                + format(self.__pain_level, "<10d") + format(self.__priority_score, "<10.2f") \
+                    + format(self.__status, "<10d") \
+                    + format(self.__day_assigned, "<10d") + format(self.get_time_assigned_str(), "<12s") \
+                        + format(self.__day_discharged, "<10d") + format(self.get_time_discharged_str(), "<12s") \
                             + format(self.__length_stay_in_ER, "<20d") + format(self.__total_wait_time, "<20d") \
                                 + format(self.__satisfaction_score, "<15.2f") 
      
