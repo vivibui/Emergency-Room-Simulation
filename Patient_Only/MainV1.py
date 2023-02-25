@@ -1,5 +1,5 @@
 
-
+import sys
 import random 
 import datetime 
 
@@ -11,8 +11,10 @@ import QueueV1 as qu
 import PrintingV1 as prt
 import ConfigV1 as cf 
 
+
 # TESTING: Uncomment set seed for testing purpose
-random.seed(100) 
+n_seed = random.randrange(sys.maxsize)
+random.seed(n_seed) 
 
 def main(): 
     
@@ -77,9 +79,9 @@ def main():
     content_SF = prt.ListSF(emergency_room)
 
     # Write to csv
-    aux.ExportCSV("emergency_ops", content_ops)
-    aux.ExportCSV("patients_list", content_patients, header_patients)
-    aux.ExportCSV("satisfaction_report", content_SF) 
+    aux.ExportCSV("emergency_ops_" + str(n_seed), content_ops)
+    aux.ExportCSV("patients_list_" + str(n_seed), content_patients, header_patients)
+    aux.ExportCSV("satisfaction_report_" + str(n_seed), content_SF) 
 
 
 if __name__ == '__main__':
