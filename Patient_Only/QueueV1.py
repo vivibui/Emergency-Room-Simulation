@@ -17,20 +17,19 @@ def AddQueue(all_patients):
 #################################################################  
 # METHOD 1: First come first serve
 #################################################################  
-
+'''
 def SelectFromQueue(queue, emergency_room, day, time):
 # Waiting ID: a list of ID from queue, sorted ascendingly 
     waiting_ID = list(queue.keys()) 
     waiting_ID.sort() 
     get_person = emergency_room.get_patient(waiting_ID[0])
     return get_person 
-
+'''
 
 
 #################################################################  
 # METHOD 2: Combination - Rule stated below
 ################################################################# 
-'''
 def SelectFromQueue(queue, emergency_room, day, time):
     # Waiting ID: a list of ID from queue, sorted ascendingly 
     waiting_ID = list(queue.keys()) 
@@ -39,7 +38,7 @@ def SelectFromQueue(queue, emergency_room, day, time):
     max_wait = 0 
     max_id = 0 
     # Get patient to assign to bed 
-        # First, a person who has been waiting more than BENCHMARK hour will be prioritized 
+        # First, a person who has been waiting more than BENCHMARK_W hour will be prioritized 
         # Second, base on priority score: the lower the higher the priority 
         # Third, base on order: the smaller the id the higher the priority 
     for id in waiting_ID: 
@@ -56,4 +55,3 @@ def SelectFromQueue(queue, emergency_room, day, time):
         id_to_select.sort() 
         get_person = emergency_room.get_patient(id_to_select[0])
     return get_person   
-'''

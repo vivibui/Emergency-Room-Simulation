@@ -12,7 +12,7 @@ import PrintingV1 as prt
 import ConfigV1 as cf 
 
 
-# TESTING: Uncomment set seed for testing purpose
+# RANDOM SEED
 n_seed = random.randrange(sys.maxsize)
 random.seed(n_seed) 
 
@@ -79,9 +79,9 @@ def main():
     content_SF = prt.ListSF(emergency_room)
 
     # Write to csv
-    aux.ExportCSV("emergency_ops_" + str(n_seed), content_ops)
-    aux.ExportCSV("patients_list_" + str(n_seed), content_patients, header_patients)
-    aux.ExportCSV("satisfaction_report_" + str(n_seed), content_SF) 
+    aux.ExportCSV("emergency_ops_" + str(n_seed), content_ops, 1)
+    aux.ExportCSV("patients_list_" + str(n_seed), content_patients, 2, header_patients)
+    aux.ExportCSV("satisfaction_report_" + str(n_seed), content_SF, 3) 
 
 
 if __name__ == '__main__':
