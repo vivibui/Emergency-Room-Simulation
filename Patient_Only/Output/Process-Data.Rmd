@@ -1,0 +1,158 @@
+---
+title: "Process-Data"
+author: "Vivian Bui"
+date: "2023-02-27"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{R}
+# All libraries
+library(dplyr)
+library(tidyverse)
+library(fs) 
+
+```
+
+```{R, results='hide', message=FALSE, warning=FALSE}
+############# PATIENTS #############
+
+# Patient List 
+file_paths <- fs::dir_ls("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/1B/Combination/PatientList")
+
+#Initiate 
+file_contents <- list() 
+count = 0 
+
+# Read file from path 
+for (i in seq_along(file_paths)){
+  file_contents[[i]] <- read.table(file_paths[[i]], header=T)}
+
+# Merge file
+df_p_co <- file_contents %>% map(as_tibble) %>% reduce(full_join)
+
+```
+
+
+```{R, results='hide', message=FALSE, warning=FALSE}
+############# ER OPERATIONS #############
+
+# Patient List 
+file_paths <- fs::dir_ls("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/1B/Combination/EmergencyRoom")
+
+#Initiate 
+file_contents <- list() 
+count = 0 
+
+# Read file from path 
+for (i in seq_along(file_paths)){
+  file_contents[[i]] <- read.table(file_paths[[i]], header=T)}
+
+# Merge file
+df_er_co <- file_contents %>% map(as_tibble) %>% reduce(full_join)
+
+```
+
+
+```{R, results='hide', message=FALSE, warning=FALSE}
+############# SATISFACTION #############
+
+# Patient List 
+file_paths <- fs::dir_ls("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/1B/Combination/Satisfaction")
+
+#Initiate 
+file_contents <- list() 
+count = 0 
+
+# Read file from path 
+for (i in seq_along(file_paths)){
+  file_contents[[i]] <- read.table(file_paths[[i]], header=T)}
+
+# Merge file
+df_sf_co <- file_contents %>% map(as_tibble) %>% reduce(full_join)
+
+```
+
+
+```{R, results='hide', message=FALSE, warning=FALSE}
+############# PATIENTS - FIFO #############
+
+# Patient List 
+file_paths <- fs::dir_ls("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/1B/FIFO/PatientList")
+
+#Initiate 
+file_contents <- list() 
+count = 0 
+
+# Read file from path 
+for (i in seq_along(file_paths)){
+  file_contents[[i]] <- read.table(file_paths[[i]], header=T)}
+
+# Merge file
+df_p_fifo <- file_contents %>% map(as_tibble) %>% reduce(full_join)
+
+```
+
+
+```{R, results='hide', message=FALSE, warning=FALSE}
+############# ER OPERATIONS #############
+
+# Patient List 
+file_paths <- fs::dir_ls("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/1B/FIFO/EmergencyRoom")
+
+#Initiate 
+file_contents <- list() 
+count = 0 
+
+# Read file from path 
+for (i in seq_along(file_paths)){
+  file_contents[[i]] <- read.table(file_paths[[i]], header=T)}
+
+# Merge file
+df_er_fifo <- file_contents %>% map(as_tibble) %>% reduce(full_join)
+
+```
+
+
+```{R, results='hide', message=FALSE, warning=FALSE}
+############# SATISFACTION #############
+
+# Patient List 
+file_paths <- fs::dir_ls("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/1B/FIFO/Satisfaction")
+
+#Initiate 
+file_contents <- list() 
+count = 0 
+
+# Read file from path 
+for (i in seq_along(file_paths)){
+  file_contents[[i]] <- read.table(file_paths[[i]], header=T)}
+
+# Merge file
+df_sf_fifo <- file_contents %>% map(as_tibble) %>% reduce(full_join)
+
+```
+
+
+```{R}
+############# EXPORT FILES #############
+
+main_path = "~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/1B/Processed"
+export_file <- function(df, path) {
+  write.csv(df, path, row.names=FALSE)
+  }
+export_file(df_er_co, paste(main_path, "df_er_co.csv", sep="/"))
+export_file(df_er_fifo, paste(main_path, "df_er_fifo.csv", sep="/"))
+export_file(df_p_co, paste(main_path, "df_p_co.csv", sep="/"))
+export_file(df_p_fifo, paste(main_path, "df_p_fifo.csv", sep="/"))
+export_file(df_sf_co, paste(main_path, "df_sf_co.csv", sep="/"))
+export_file(df_sf_fifo, paste(main_path, "df_sf_fifo.csv", sep="/"))
+
+```
+
+
+
+
