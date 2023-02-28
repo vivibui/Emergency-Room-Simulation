@@ -7,20 +7,20 @@ def LogHeader(day):
     print('----------------------------------------')
     print(format(f'DAY {day}', "10s"))
     print('----------------------------------------')
-    header = format(f'Day_{day}', '10s') + format("New_Patients", "20s") + format("Waiting", "15s") \
+    header =  format('Day', '10s') + format('Time', '10s') + format("New_Patients", "20s") + format("Waiting", "15s") \
         + format("Assigned", "10s") + format("Discharged", "15s") + format("Beds_Avail_EOH", "15s") + "\n"
     print(header) 
     return header
     
 
-def LogOutput(emergency_room, total_patient_today, h, count_discharged): 
-    output = format(f'{h}:00', '<10s') + format(total_patient_today, '<20d') + format(emergency_room.count_waiting(), '<15d') \
+def LogOutput(emergency_room, total_patient_today, h, count_discharged, day): 
+    output = format(day, '<10d') + format(f'{h}:00', '<10s') + format(total_patient_today, '<20d') + format(emergency_room.count_waiting(), '<15d') \
         + format(emergency_room.count_treating(), '<10d') + format(count_discharged, '<15d') + format(emergency_room.get_open_beds(), "<15d")
     print(output)
     return output 
 
 
-def ListPatients(emergency_room): 
+def ListPatients(emergency_room, n_seed): 
     content_patients = "" # to export result 
     print() 
     print("--------------------------------------------------------------------------------------------------------")
@@ -37,11 +37,11 @@ def ListPatients(emergency_room):
     for patient in emergency_room.get_patients(): 
         print(patient.__str__())
         # To write list of patients to csv: 
-        content_patients += patient.__str__() + "\n"
+        content_patients += format(n_seed, "<30d") + patient.__str__() + "\n"
     return header_patients, content_patients 
 
 
-def ListSF(emergency_room): 
+def ListSF(emergency_room, n_seed): 
     # Initialize 
     content_SF = ''
     total_patients_day = 0 
@@ -61,8 +61,14 @@ def ListSF(emergency_room):
         avg_SF_day = round(total_SF_day/total_patients_day,2) 
         # Print 
         print(f'Day {day}: {avg_SF_day}') 
-        content_SF += "Day " + str(day) + "| " + str(avg_SF_day) + "\n"
+        content_SF += format(n_seed, "<30d") + format(day,"<10d") + format(avg_SF_day,"<20.2f") + "\n"
         # Reset 
         total_patients_day = 0 
         total_SF_day = 0 
-    return content_SF 
+    # Header
+    header_SF = format("Day","<10s") + format("AVG_SF_per_Day", "<20s") +"\n"
+    return header_SF, content_SF 
+
+
+def AddSimHeader(header): 
+    return format("Sim_N", "<30s") + header

@@ -22,15 +22,14 @@ def main():
     day = 0 
     p_id = 0 
     emergency_room = EmergencyRoomV1.EmergencyRoom(open_beds = cf.AVAIL_BEDS)
-    content_ops = ""  # to export result 
+    content_ER = ""  # to export result 
 
     # Loop day 
     while day < cf.MAX_DAYS: 
         day += 1 
         h = 0 
         # Print Header 
-        header = prt.LogHeader(day)
-        content_ops += header 
+        header_ER = prt.LogHeader(day)
 
         for h in range(24): 
             # Initialize 
@@ -67,21 +66,25 @@ def main():
                         emergency_room, queue = eo.AssignBed(queue, emergency_room, day, time)
 
             # Print Output 
-            output = prt.LogOutput(emergency_room, total_patients_one_hour, h, count_discharged)
+            output = prt.LogOutput(emergency_room, total_patients_one_hour, h, count_discharged, day)
 
             # To write Emergency Operations to csv
-            content_ops += output + "\n"
+            content_ER += format(n_seed, "<30d") + output + "\n"
 
     # Print Patients
-    header_patients, content_patients = prt.ListPatients(emergency_room) 
+    header_patients, content_patients = prt.ListPatients(emergency_room, n_seed) 
 
     # Print Satisfaction Report 
-    content_SF = prt.ListSF(emergency_room)
+    header_SF, content_SF = prt.ListSF(emergency_room, n_seed)
+
+    # Add Sim Number to Headers
+    header_ER, header_patients, header_SF = prt.AddSimHeader(header_ER), prt.AddSimHeader(header_patients), \
+                                            prt.AddSimHeader(header_SF)
 
     # Write to csv
-    aux.ExportCSV("emergency_ops_" + str(n_seed), content_ops, 1)
+    aux.ExportCSV("emergency_ops_" + str(n_seed), content_ER, 1, header_ER)
     aux.ExportCSV("patients_list_" + str(n_seed), content_patients, 2, header_patients)
-    aux.ExportCSV("satisfaction_report_" + str(n_seed), content_SF, 3) 
+    aux.ExportCSV("satisfaction_report_" + str(n_seed), content_SF, 3, header_SF) 
 
 
 if __name__ == '__main__':
