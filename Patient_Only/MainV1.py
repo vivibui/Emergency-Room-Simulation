@@ -12,11 +12,7 @@ import PrintingV1 as prt
 import ConfigV1 as cf 
 
 
-# RANDOM SEED
-n_seed = random.randrange(sys.maxsize)
-random.seed(n_seed) 
-
-def main(): 
+def main(n_seed): 
     
     # Initialize 
     day = 0 
@@ -87,5 +83,5 @@ def main():
     aux.ExportCSV("satisfaction_report_" + str(n_seed), content_SF, 3, header_SF) 
 
 
-if __name__ == '__main__':
-    main() 
+# if __name__ == '__main__':
+#    main() 

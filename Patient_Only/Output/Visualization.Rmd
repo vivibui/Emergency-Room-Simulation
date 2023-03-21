@@ -1,0 +1,106 @@
+---
+title: "Visualization"
+author: "Vivian Bui"
+date: "2023-03-21"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+```
+
+
+```{r}
+# Copy 
+df_er_co_copy <- df_er_co
+df_er_fifo_copy <- df_er_fifo
+df_p_co_copy <- df_p_co
+df_p_fifo_copy <- df_p_fifo
+df_sf_co_copy <- df_sf_co
+df_sf_fifo_copy <- df_sf_fifo
+
+```
+
+
+```{r}
+# Add method column 
+df_er_co_copy <- df_er_co_copy %>% mutate(Method = "CO") 
+df_er_fifo_copy <- df_er_fifo_copy %>% mutate(Method = "FIFO")
+df_p_co_copy <- df_p_co_copy %>% mutate(Method = "CO") 
+df_p_fifo_copy <- df_p_fifo_copy %>% mutate(Method = "FIFO")
+
+# Merge 
+df_er <- full_join(df_er_co_copy, df_er_fifo_copy, by = c("Sim_N", "Day", "Time", "New_Patients", "Waiting", "Assigned", "Discharged", "Beds_Avail_EOH", "Method"))
+df_p <- full_join(df_p_co_copy, df_p_fifo_copy, by = c("Sim_N", "ID", "Day_C", "Time_C", "Age", "AcuteLv", "PainLv", "Priority", "Status", "Day_A", "Time_A", "Day_D", "Time_D", "Time_Left_In_ER", "Total_Wait_Time", "SF_Score", "Method"))
+
+```
+
+
+```{r}
+# Number of Waiting Patients by Hour  
+er <- df_er %>% filter(Day > 2)
+
+# Plot 
+er %>%
+   mutate(across(Time, factor, levels=c("0:00","1:00","2:00", "3:00","4:00","5:00", "6:00", "7:00", "8:00", "9:00","10:00","11:00","12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"))) %>%
+    ggplot() +
+    geom_bar(aes(x= Waiting, fill = Method)) + 
+    facet_wrap(vars(Time)) +
+    scale_y_continuous(name = "Frequency") + 
+    scale_x_discrete(name = "Number of Waiting Patients")
+```
+```{r}
+# Drop first two days 
+patients <- df_p %>% filter(Day_C %in% c(3,4,5,6,7,8,9,10))
+
+# Distribution of wait time 
+ggplot(patients, aes(y=Total_Wait_Time, x=Method)) +
+    geom_boxplot() + 
+    scale_y_continuous(name = "Wait Time")
+
+```
+
+```{r}
+# Add Group (Priority Group based on Priority Score)
+patients <- patients %>% 
+  mutate(Group = case_when(Priority < 2 ~ '1',
+  Priority < 3 ~ '2',
+  Priority < 4 ~ '3',
+  Priority < 5 ~ '4',
+  Priority > 4 ~ '5'))
+
+# Wait Time by Priority Group 
+ggplot(patients, aes(y=Total_Wait_Time, x=Group)) +
+    geom_boxplot() + 
+    facet_wrap(vars(Method)) + 
+    scale_y_continuous(name = "Wait Time") + 
+    scale_x_discrete(name = "Priority Group")
+```
+
+```{r}
+patients <- patients %>% 
+  mutate(Age_Group = case_when(Age < 18 ~ '1',
+  Age < 45 ~ '2',
+  Age < 65 ~ '3',
+  Age >= 65 ~ '4'))
+
+# Wait Time by Age Group 
+ggplot(patients, aes(y=Total_Wait_Time, x=Age_Group)) +
+    geom_boxplot() + 
+    facet_wrap(vars(Method)) + 
+    scale_y_continuous(name = "Wait Time") + 
+    scale_x_discrete(name = "Age Group")
+
+```
+
+
+
+
+
+
