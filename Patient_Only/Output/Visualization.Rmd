@@ -99,6 +99,31 @@ ggplot(patients, aes(y=Total_Wait_Time, x=Age_Group)) +
 
 ```
 
+```{r}
+# Satisfaction by Priority Group 
+sf_co <- patients %>% filter(Method == "CO") %>% group_by(Group)  %>% summarise(mean_SF = mean(SF_Score), Method = 'CO')
+sf_fifo <- patients %>% filter(Method == "FIFO") %>% group_by(Group)  %>% summarise(mean_SF = mean(SF_Score), Method = "FIFO")
+sf <- full_join(sf_co, sf_fifo, by = c("Method", "Group", "mean_SF"))
+
+# Plot
+ggplot(sf, aes(y=mean_SF, x=Group, color=Method)) +
+    geom_point() + 
+    scale_y_continuous(name = "Mean SF Score")
+
+```
+
+```{r}
+# Satisfaction by Age Group 
+sf_co <- patients %>% filter(Method == "CO") %>% group_by(Age_Group)  %>% summarise(mean_SF = mean(SF_Score), Method = 'CO')
+sf_fifo <- patients %>% filter(Method == "FIFO") %>% group_by(Age_Group)  %>% summarise(mean_SF = mean(SF_Score), Method = "FIFO")
+sf <- full_join(sf_co, sf_fifo, by = c("Method", "Age_Group", "mean_SF"))
+
+# Plot
+ggplot(sf, aes(y=mean_SF, x=Age_Group, color=Method)) +
+    geom_point() + 
+    scale_y_continuous(name = "Mean SF Score")
+
+```
 
 
 

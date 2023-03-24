@@ -8,7 +8,7 @@ MAX_DAYS = 15
     # the larger the number, the easier to check for LWBS, wait time, and satisfaction calculation 
 MAX_PATIENTS = 5 
 # Initial Condition: ER Capacity 
-AVAIL_BEDS = 12
+AVAIL_BEDS = 8
 # Benchmark of wait time 
 BENCHMARK_W = 240 # minutes 
 # Benchmark of wait time before the satisfaction score started to get deducted (METHOD 2)

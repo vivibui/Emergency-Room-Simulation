@@ -7,5 +7,5 @@ Benchmark W = 240
 Benchmark D = 30 
 Max wait = 720 
 
-Method of Calc SF: 2 (d_point after benchmark) 
+Method of Calc SF: 2
 
