@@ -20,7 +20,7 @@ def DeductionPoints(pain_level):
 '''
 # METHOD 1: Deduction starts since arrival
     # Every 5 minutes, satisfaction score will be deducted by d_point
-    # In this scenario, maximum minutes waiting before a patient decide whether to LWBS is 125 minutes
+    # In this scenario, maximum minutes waiting before a patient decide whether to LWBS is MAX_WAIT minutes
 def CalSatisfaction(person): 
     d_point = DeductionPoints(person.get_pain_level())
     total_wait_time = person.get_total_wait_time() 

@@ -83,5 +83,3 @@ def main(n_seed):
     aux.ExportCSV("satisfaction_report_" + str(n_seed), content_SF, 3, header_SF) 
 
 
-# if __name__ == '__main__':
-#    main() 

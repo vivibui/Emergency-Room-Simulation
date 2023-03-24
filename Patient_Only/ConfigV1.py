@@ -9,7 +9,7 @@ MAX_DAYS = 15
 MAX_PATIENTS = 5 
 # Initial Condition: ER Capacity 
 AVAIL_BEDS = 8
-# Benchmark of wait time 
+# Benchmark of wait time (used in Combination Method - Queue module)
 BENCHMARK_W = 240 # minutes 
 # Benchmark of wait time before the satisfaction score started to get deducted (METHOD 2)
 BENCHMARK_D = 30
