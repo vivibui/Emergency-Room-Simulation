@@ -27,7 +27,7 @@ class Patient(PersonV1.Person):
         self.__total_wait_time = 0 
         # Note: total_wait_time attribute stores the total minutes a patient have waited before getting a bed 
         # Cal_wait_time method returns the wait time at any point of time argument 
-        self.__satisfaction_score = 0 
+        self.__satisfaction_score = 5.0
 
     ################################################   
     ###################  Get Method ################

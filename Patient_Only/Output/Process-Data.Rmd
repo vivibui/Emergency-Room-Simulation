@@ -9,143 +9,114 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
 ```{R}
-# All libraries
 library(dplyr)
 library(tidyverse)
 library(fs) 
-
-```
-
-```{R, results='hide', message=FALSE, warning=FALSE}
-############# PATIENTS #############
-
-# Patient List 
-file_paths <- fs::dir_ls("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/1B/Combination/PatientList")
-
-#Initiate 
-file_contents <- list() 
-
-# Read file from path 
-for (i in seq_along(file_paths)){
-  file_contents[[i]] <- read.table(file_paths[[i]], header=T)}
-
-# Merge file
-df_p_co <- file_contents %>% map(as_tibble) %>% reduce(full_join)
-
 ```
 
 
 ```{R, results='hide', message=FALSE, warning=FALSE}
-############# ER OPERATIONS #############
 
-# Patient List 
-file_paths <- fs::dir_ls("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/1B/Combination/EmergencyRoom")
+############# CREATE FILES #############
 
-#Initiate 
-file_contents <- list() 
+# Create function 
+create_file <- function(dir){
+  # Get file path 
+  file_paths <- fs::dir_ls(dir)
+  #Initiate 
+  file_contents <- list() 
+  # Read file from path 
+  for (i in seq_along(file_paths)){
+    file_contents[[i]] <- read.table(file_paths[[i]], header=T)}
+  # Merge file
+  return (file_contents %>% map(as_tibble) %>% reduce(full_join)) }
 
-# Read file from path 
-for (i in seq_along(file_paths)){
-  file_contents[[i]] <- read.table(file_paths[[i]], header=T)}
+# Run function 
+df_er_c1 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/C1/EmergencyRoom")
+df_er_c2 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/C2/EmergencyRoom")
+df_er_fifo <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/FIFO/EmergencyRoom")
 
-# Merge file
-df_er_co <- file_contents %>% map(as_tibble) %>% reduce(full_join)
+df_p_c1 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/C1/PatientList")
+df_P_c2 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/C2/PatientList")
+df_p_fifo <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/FIFO/PatientList") 
+
+df_sf_c1 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/C1/Satisfaction")
+df_sf_c2 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/C2/Satisfaction")
+df_sf_fifo <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/FIFO/Satisfaction")
 
 ```
 
 
 ```{R, results='hide', message=FALSE, warning=FALSE}
-############# SATISFACTION #############
 
-# Patient List 
-file_paths <- fs::dir_ls("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/1B/Combination/Satisfaction")
-
-#Initiate 
-file_contents <- list() 
-
-# Read file from path 
-for (i in seq_along(file_paths)){
-  file_contents[[i]] <- read.table(file_paths[[i]], header=T)}
-
-# Merge file
-df_sf_co <- file_contents %>% map(as_tibble) %>% reduce(full_join)
-
-```
-
-
-```{R, results='hide', message=FALSE, warning=FALSE}
-############# PATIENTS - FIFO #############
-
-# Patient List 
-file_paths <- fs::dir_ls("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/1B/FIFO/PatientList")
-
-#Initiate 
-file_contents <- list() 
-
-# Read file from path 
-for (i in seq_along(file_paths)){
-  file_contents[[i]] <- read.table(file_paths[[i]], header=T)}
-
-# Merge file
-df_p_fifo <- file_contents %>% map(as_tibble) %>% reduce(full_join)
-
-```
-
-
-```{R, results='hide', message=FALSE, warning=FALSE}
-############# ER OPERATIONS #############
-
-# Patient List 
-file_paths <- fs::dir_ls("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/1B/FIFO/EmergencyRoom")
-
-#Initiate 
-file_contents <- list() 
-
-# Read file from path 
-for (i in seq_along(file_paths)){
-  file_contents[[i]] <- read.table(file_paths[[i]], header=T)}
-
-# Merge file
-df_er_fifo <- file_contents %>% map(as_tibble) %>% reduce(full_join)
-
-```
-
-
-```{R, results='hide', message=FALSE, warning=FALSE}
-############# SATISFACTION #############
-
-# Patient List 
-file_paths <- fs::dir_ls("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/1B/FIFO/Satisfaction")
-
-#Initiate 
-file_contents <- list() 
-
-# Read file from path 
-for (i in seq_along(file_paths)){
-  file_contents[[i]] <- read.table(file_paths[[i]], header=T)}
-
-# Merge file
-df_sf_fifo <- file_contents %>% map(as_tibble) %>% reduce(full_join)
-
-```
-
-
-```{R}
 ############# EXPORT FILES #############
 
-main_path = "~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/1B/Processed"
+# Create Function 
+main_path = "~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/Processed"
 export_file <- function(df, path) {
   write.csv(df, path, row.names=FALSE)
-  }
-export_file(df_er_co, paste(main_path, "df_er_co.csv", sep="/"))
+}
+
+# Run function 
+export_file(df_er_c1, paste(main_path, "df_er_c1.csv", sep="/"))
+export_file(df_er_c2, paste(main_path, "df_er_c2.csv", sep="/"))
 export_file(df_er_fifo, paste(main_path, "df_er_fifo.csv", sep="/"))
-export_file(df_p_co, paste(main_path, "df_p_co.csv", sep="/"))
+
+export_file(df_p_c1, paste(main_path, "df_p_c1.csv", sep="/"))
+export_file(df_p_c2, paste(main_path, "df_p_c2.csv", sep="/"))
 export_file(df_p_fifo, paste(main_path, "df_p_fifo.csv", sep="/"))
-export_file(df_sf_co, paste(main_path, "df_sf_co.csv", sep="/"))
+
+export_file(df_sf_c1, paste(main_path, "df_sf_c1.csv", sep="/"))
+export_file(df_sf_c2, paste(main_path, "df_sf_c2.csv", sep="/"))
 export_file(df_sf_fifo, paste(main_path, "df_sf_fifo.csv", sep="/"))
 
 ```
+
+
+```{R, results='hide', message=FALSE, warning=FALSE}
+
+############# CREATE COPY #############
+
+df_er_c1_copy <- df_er_c1
+df_er_c2_copy <- df_er_c2
+df_er_fifo_copy <- df_er_fifo
+
+df_p_c1_copy <- df_p_c1
+df_p_c2_copy <- df_p_c2
+df_p_fifo_copy <- df_p_fifo
+
+df_sf_c1_copy <- df_sf_c1
+df_sf_c2_copy <- df_sf_c2
+df_sf_fifo_copy <- df_sf_fifo
+
+```
+
+
+```{R, results='hide', message=FALSE, warning=FALSE}
+
+############# MERGE #############
+
+# Add method column 
+df_er_c1_copy <- df_er_c1_copy %>% mutate(Method = "C1") 
+df_er_c2_copy <- df_er_c2_copy %>% mutate(Method = "C2") 
+df_er_fifo_copy <- df_er_fifo_copy %>% mutate(Method = "FIFO")
+
+df_p_c1_copy <- df_p_c1_copy %>% mutate(Method = "C1") 
+df_p_c2_copy <- df_p_c2_copy %>% mutate(Method = "C2") 
+df_p_fifo_copy <- df_p_fifo_copy %>% mutate(Method = "FIFO")
+
+# Merge
+df_er <- full_join(df_er_c1_copy, df_er_fifo_copy, by = c("Sim_N", "Day", "Time", "New_Patients", "Waiting", "Assigned", "Discharged", "Beds_Avail_EOH", "Method"))
+df_er <- full_join(df_er, df_er_c2_copy, by = c("Sim_N", "Day", "Time", "New_Patients", "Waiting", "Assigned", "Discharged", "Beds_Avail_EOH", "Method"))
+
+df_p <- full_join(df_p_c1_copy, df_p_fifo_copy, by = c("Sim_N", "ID", "Day_C", "Time_C", "Age", "AcuteLv", "PainLv", "Priority", "Status", "Day_A", "Time_A", "Day_D", "Time_D", "Time_Left_In_ER", "Total_Wait_Time", "SF_Score", "Method"))
+df_p <- full_join(df_p, df_p_c2_copy, by = c("Sim_N", "ID", "Day_C", "Time_C", "Age", "AcuteLv", "PainLv", "Priority", "Status", "Day_A", "Time_A", "Day_D", "Time_D", "Time_Left_In_ER", "Total_Wait_Time", "SF_Score", "Method"))
+
+```
+
+
 
 
 

@@ -35,7 +35,7 @@ def AssignBed(queue, emergency_room, day, time):
     # Bed is taken 
     emergency_room.bed_taken()
     # Select a person from queue 
-    get_person = qu.SelectFromQueue(queue, emergency_room, day, time)        
+    get_person = qu.SelectFromQueue(queue, day, time)        
     # Change status from Waiting to Treating 
     get_person.set_status(1)
     # Set time stay in ER
@@ -49,7 +49,7 @@ def AssignBed(queue, emergency_room, day, time):
     # Calculate satisfaction score 
     score = sf.CalSatisfaction(get_person)
     get_person.set_satisfaction_score(score) 
-    # Remove selected patient from queue and waiting ID 
-    del queue[get_person.get_id()]
+    # Remove selected patient from queue
+    queue.remove(get_person)
 
     return emergency_room, queue 

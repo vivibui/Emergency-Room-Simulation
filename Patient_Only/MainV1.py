@@ -51,7 +51,7 @@ def main(n_seed):
                 # Loop to arrange patients to available beds 
                 while emergency_room.get_open_beds() > 0 and emergency_room.count_waiting() > 0: 
                     # Add to queue 
-                    queue = qu.AddQueue(all_patients)
+                    queue = qu.Queue(all_patients)
                     # Number of times assigning beds
                     if emergency_room.get_open_beds() > emergency_room.count_waiting(): 
                         times_assign_beds = emergency_room.count_waiting() 

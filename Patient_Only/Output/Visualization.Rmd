@@ -35,7 +35,7 @@ df_er_fifo_copy <- df_er_fifo_copy %>% mutate(Method = "FIFO")
 df_p_co_copy <- df_p_co_copy %>% mutate(Method = "CO") 
 df_p_fifo_copy <- df_p_fifo_copy %>% mutate(Method = "FIFO")
 
-# Merge 
+# Merge (both CO and FIFO)
 df_er <- full_join(df_er_co_copy, df_er_fifo_copy, by = c("Sim_N", "Day", "Time", "New_Patients", "Waiting", "Assigned", "Discharged", "Beds_Avail_EOH", "Method"))
 df_p <- full_join(df_p_co_copy, df_p_fifo_copy, by = c("Sim_N", "ID", "Day_C", "Time_C", "Age", "AcuteLv", "PainLv", "Priority", "Status", "Day_A", "Time_A", "Day_D", "Time_D", "Time_Left_In_ER", "Total_Wait_Time", "SF_Score", "Method"))
 
@@ -43,8 +43,20 @@ df_p <- full_join(df_p_co_copy, df_p_fifo_copy, by = c("Sim_N", "ID", "Day_C", "
 
 
 ```{r}
+# Get subset of LWBS 
+LWBS <- df_p %>% filter(Time_A == "LWBS")
+
+# Remove TBD (patients who have not yet receive a bed)
+df_p <- df_p %>% filter(Time_A != "TBD")
+
+```
+
+
+
+```{r}
+# --- Uncomment if using 1B datasets 
 # Number of Waiting Patients by Hour  
-er <- df_er %>% filter(Day > 2)
+# er <- df_er %>% filter(Day > 2) 
 
 # Plot 
 er %>%
@@ -55,13 +67,28 @@ er %>%
     scale_y_continuous(name = "Frequency") + 
     scale_x_discrete(name = "Number of Waiting Patients")
 ```
+
 ```{r}
+# Average Time Stay in ER by Priority Group 
+# 
+
+```
+
+
+
+
+```{r}
+# --- Uncomment if using 1B datasets 
 # Drop first two days 
-patients <- df_p %>% filter(Day_C %in% c(3,4,5,6,7,8,9,10))
+# patients <- df_p %>% filter(Day_C %in% c(3,4,5,6,7,8,9,10))
+
+# --- Uncomment if using 2A datasets 
+# Drop LWBS and TBD 
+patients <- df_p %>% filter(Day_A != "LWBS", Day_A != "TBD")
 
 # Distribution of wait time 
 ggplot(patients, aes(y=Total_Wait_Time, x=Method)) +
-    geom_boxplot() + 
+    geom_violin() + 
     scale_y_continuous(name = "Wait Time")
 
 ```
@@ -84,6 +111,7 @@ ggplot(patients, aes(y=Total_Wait_Time, x=Group)) +
 ```
 
 ```{r}
+# Add age group 
 patients <- patients %>% 
   mutate(Age_Group = case_when(Age < 18 ~ '1',
   Age < 45 ~ '2',

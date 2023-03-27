@@ -3,11 +3,11 @@ import MainV1
 import sys
 import random 
 
-sim = 100
+sim = 26
 
 # Run multiple sim 
 for i in range(sim):
     # RANDOM SEED
     n_seed = random.randrange(sys.maxsize)
-    random.seed(n_seed) 
+    random.seed(n_seed)
     MainV1.main(n_seed) 
