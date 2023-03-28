@@ -3,7 +3,7 @@ import MainV1
 import sys
 import random 
 
-sim = 26
+sim = 1
 
 # Run multiple sim 
 for i in range(sim):

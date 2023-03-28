@@ -39,7 +39,7 @@ df_er_c2 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output
 df_er_fifo <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/FIFO/EmergencyRoom")
 
 df_p_c1 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/C1/PatientList")
-df_P_c2 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/C2/PatientList")
+df_p_c2 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/C2/PatientList")
 df_p_fifo <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/FIFO/PatientList") 
 
 df_sf_c1 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/C1/Satisfaction")
@@ -59,7 +59,7 @@ export_file <- function(df, path) {
   write.csv(df, path, row.names=FALSE)
 }
 
-# Run function 
+# Export files to designated directory 
 export_file(df_er_c1, paste(main_path, "df_er_c1.csv", sep="/"))
 export_file(df_er_c2, paste(main_path, "df_er_c2.csv", sep="/"))
 export_file(df_er_fifo, paste(main_path, "df_er_fifo.csv", sep="/"))

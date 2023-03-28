@@ -9,7 +9,6 @@ def Queue(all_patients):
     # Queue: list of patient objects  
     for patient in all_patients: 
         if patient.get_status() == 0: 
-            # queue[int(patient.get_id())] = int(patient.get_priority_score())
             queue.append(patient)
     return queue
 
