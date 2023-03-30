@@ -9,7 +9,7 @@ import ConfigV1 as cf
 def SelectFromQueue(queue, day, time):
     return queue.get_queue()[0]
 
-
+'''
 #################################################################  
 # METHOD 2: C1 - Rule stated below
 ################################################################# 
@@ -67,3 +67,4 @@ def SelectFromQueue(queue, day, time):
         return patient # LIFO applied after when a queuing patient with max wait time reached benchmark W 
     else: 
         return min_patient
+'''
