@@ -34,17 +34,17 @@ create_file <- function(dir){
   return (file_contents %>% map(as_tibble) %>% reduce(full_join)) }
 
 # Run function 
-df_er_c1 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/C1/EmergencyRoom")
-df_er_c2 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/C2/EmergencyRoom")
-df_er_fifo <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/FIFO/EmergencyRoom")
+df_er_c1 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2B/C1/EmergencyRoom")
+df_er_c2 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2B/C2/EmergencyRoom")
+df_er_fifo <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2B/FIFO/EmergencyRoom")
 
-df_p_c1 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/C1/PatientList")
-df_p_c2 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/C2/PatientList")
-df_p_fifo <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/FIFO/PatientList") 
+df_p_c1 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2B/C1/PatientList")
+df_p_c2 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2B/C2/PatientList")
+df_p_fifo <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2B/FIFO/PatientList") 
 
-df_sf_c1 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/C1/Satisfaction")
-df_sf_c2 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/C2/Satisfaction")
-df_sf_fifo <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/FIFO/Satisfaction")
+df_sf_c1 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2B/C1/Satisfaction")
+df_sf_c2 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2B/C2/Satisfaction")
+df_sf_fifo <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2B/FIFO/Satisfaction")
 
 ```
 
@@ -54,7 +54,7 @@ df_sf_fifo <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Outp
 ############# EXPORT FILES #############
 
 # Create Function 
-main_path = "~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2A/Processed"
+main_path = "~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/2B/Processed"
 export_file <- function(df, path) {
   write.csv(df, path, row.names=FALSE)
 }
