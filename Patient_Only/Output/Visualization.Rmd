@@ -12,7 +12,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(dplyr)
 library(tidyverse)
-library(ggdark)
 library(ggplot2)
 library(ggforce) 
 ```
@@ -32,13 +31,17 @@ df_p <- df_p %>% filter(Time_A != "TBD")
 ```{r}
 # Plot 
 df_er %>%
-   mutate(across(Time, factor, levels=c("0:00","1:00","2:00", "3:00","4:00","5:00", "6:00", "7:00", "8:00", "9:00","10:00","11:00","12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"))) %>%
+   mutate(across(Day, factor, levels=c("1","2","3", "4","5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"))) %>%
     ggplot(aes(x= Waiting, fill = Method)) +
     geom_density(alpha=.45, col=NA) +
-    facet_wrap(vars(Time)) +
-    scale_y_continuous(name = "Frequency") + 
+    facet_wrap(vars(Day)) +
+    scale_y_continuous(name = "Density") + 
     scale_x_discrete(name = "Number of Waiting Patients") + 
-    theme_bw() 
+    ggtitle('Distribution of Waiting Patients by Day', 
+            subtitle = "Result of 1000 simulations") + 
+    theme_bw() + 
+    theme(plot.title=element_text(hjust=0.5),
+          plot.subtitle = element_text(hjust=0.5)) 
 ```
 
 
@@ -52,8 +55,12 @@ ggplot(df_p, aes(y=Total_Wait_Time, x=Method)) +
     geom_violin() + 
     scale_y_continuous(name = "Wait Time") + 
     scale_x_discrete(name = "Method") +
-    theme_minimal() 
-
+    ggtitle('Distribution of Wait Time across Methods', 
+            subtitle = "Result of 1000 simulations") +  
+    theme_minimal() +
+    theme(plot.title=element_text(hjust=0.5),
+          plot.subtitle = element_text(hjust=0.5),
+          plot.background=element_blank()) 
 ```
 
 ```{r}
@@ -63,11 +70,15 @@ df_p %>% group_by(Method) %>%
             .groups = 'drop') %>% 
   ggplot(aes(x=Method, y=percent)) + 
   geom_col(width = 0.5, fill="steelblue") + 
-  scale_y_continuous(name = "Percent of LWBS") + 
+  scale_y_continuous(name = "Percent of LWBS (%)") + 
   scale_x_discrete(name = "Method") + 
   geom_text(size = 3, aes(label=percent), 
             position=position_dodge(width=0.9), vjust=-0.25) +
-  theme_minimal()
+  ggtitle('The Percentage of LWBS across Methods',
+          subtitle = "Result of 1000 simulations") + 
+  theme_minimal() + 
+  theme(plot.title=element_text(hjust=0.5),
+        plot.subtitle = element_text(hjust=0.5)) 
 ```
 ```{r}
 # Compare the % of LWBS in each Priority Group across method 
@@ -83,7 +94,11 @@ df_p %>% group_by(AcuteLv, Method) %>%
     scale_y_continuous(name = "Percent of LWBS (%)") + 
     scale_fill_brewer(palette="BuGn") + 
     scale_x_discrete(name = "Priority Group") + 
-    theme_minimal() 
+    ggtitle('The percentage of LWBS across Priority Groups',
+            subtitle = "Result of 1000 simulations") + 
+    theme_minimal() + 
+    theme(plot.title=element_text(hjust=0.5),
+          plot.subtitle = element_text(hjust=0.5)) 
 
 ```
 
@@ -92,14 +107,19 @@ df_p %>% group_by(AcuteLv, Method) %>%
 # Mean Satisfaction Score by Day across Methods
 df_p %>% group_by(Day_C, Method) %>% filter(Time_A != "TBD") %>% 
   summarise(mean_SF = round(mean(SF_Score),2)) %>% 
-  ggplot(aes(y=factor(Day_C), x=mean_SF, fill=Method)) + 
+  ggplot(aes(y=factor(Day_C), x=mean_SF, fill=Method)) +
    geom_bar(stat="identity", position=position_dodge()) +
-    scale_fill_brewer(palette="BuGn") + 
+    scale_fill_brewer() + 
     scale_x_continuous(name = "Mean Satisfaction Score") + 
     scale_y_discrete(name = "Day") + 
     geom_text(aes(label=mean_SF), position=position_dodge(width=0.9), 
-              hjust=-0.5, size = 2, color="black") +
-    theme_minimal() 
+              hjust=-0.5, size = 2, color="black") + 
+    ggtitle('End-of-day Average Satisfaction Score',
+            subtitle = "Result of 1000 simulations") + 
+    theme_minimal() + 
+    theme(plot.title=element_text(hjust=0.5),
+          plot.subtitle = element_text(hjust=0.5)) 
+    
 ```
 
 ```{r}
@@ -114,7 +134,11 @@ df_p %>% group_by(AcuteLv, Method) %>% filter(Time_A != "TBD") %>%
     scale_x_discrete(name = "Priority Group") + 
     geom_text(size = 3, color = 'black', aes(label=mean_SF), 
             position=position_dodge(width=0.9), vjust=-0.25)+
-    theme_minimal() 
+    theme_minimal() + 
+    ggtitle('End-of-day Average Satisfaction Score across Priority Groups',
+            subtitle = "Result of 1000 simulations") + 
+    theme(plot.title=element_text(hjust=0.5),
+          plot.subtitle = element_text(hjust=0.5)) 
 ```
 
 
