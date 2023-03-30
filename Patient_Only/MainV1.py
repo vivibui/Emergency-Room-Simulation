@@ -3,11 +3,11 @@ import sys
 import random 
 import datetime 
 
-import EmergencyRoomV1 
+import EmergencyRoomV1
+import QueueV1
 import AuxiliaryV1 as aux 
 import PatientOpsV1 as po 
 import EROpsV1 as eo 
-import QueueV1 as qu
 import PrintingV1 as prt
 import ConfigV1 as cf 
 
@@ -18,6 +18,7 @@ def main(n_seed):
     day = 0 
     p_id = 0 
     emergency_room = EmergencyRoomV1.EmergencyRoom(open_beds = cf.AVAIL_BEDS)
+    queue = QueueV1.Queue() 
     content_ER = ""  # to export result 
 
     # Loop day 
@@ -39,19 +40,21 @@ def main(n_seed):
                 # New patients 
                 if m in minutes_list: 
                     p_id = aux.IDIncrement(p_id) 
+                    # A new patient 
+                    new_patient = po.NewPatient(p_id, day, time)
                     # Pass list of new patients today to the Emergency Room 
-                    all_patients.append(po.NewPatient(p_id, day, time)) 
+                    all_patients.append(new_patient) 
+                    # Add new patient to Queue 
+                    queue.enqueue(new_patient)
                
                 # Discharge patient 
                 emergency_room, count_discharged = eo.ReleasePatient(emergency_room, all_patients, day, time, count_discharged)
 
                 # Patients LWBS 
-                eo.LWBS(all_patients, day, time)
+                eo.LWBS(queue, all_patients, day, time)
 
                 # Loop to arrange patients to available beds 
                 while emergency_room.get_open_beds() > 0 and emergency_room.count_waiting() > 0: 
-                    # Add to queue 
-                    queue = qu.Queue(all_patients)
                     # Number of times assigning beds
                     if emergency_room.get_open_beds() > emergency_room.count_waiting(): 
                         times_assign_beds = emergency_room.count_waiting() 
@@ -76,7 +79,7 @@ def main(n_seed):
     # Add Sim Number to Headers
     header_ER, header_patients, header_SF = prt.AddSimHeader(header_ER), prt.AddSimHeader(header_patients), \
                                             prt.AddSimHeader(header_SF)
-
+    
     # Write to csv
     aux.ExportCSV("emergency_ops_" + str(n_seed), content_ER, 1, header_ER)
     aux.ExportCSV("patients_list_" + str(n_seed), content_patients, 2, header_patients)
