@@ -2,7 +2,7 @@ VALUE OF CONFIG:
 
 Max days = 15
 Max patients = 5
-Max beds = 8
+Max beds = 10
 Benchmark W = 240
 Benchmark D = 30 
 Max wait = 720 

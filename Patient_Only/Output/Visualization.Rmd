@@ -14,6 +14,8 @@ library(dplyr)
 library(tidyverse)
 library(ggplot2)
 library(ggforce) 
+library("viridis")
+
 ```
 
 
@@ -25,7 +27,6 @@ LWBS <- df_p %>% filter(Time_A == "LWBS")
 df_p <- df_p %>% filter(Time_A != "TBD")
 
 ```
-
 
 
 ```{r}
@@ -62,6 +63,8 @@ ggplot(df_p, aes(y=Total_Wait_Time, x=Method)) +
           plot.background=element_blank()) 
 ```
 
+
+
 ```{r}
 # Compare the % of LWBS in each method 
 df_p %>% group_by(Method) %>% 
@@ -72,7 +75,7 @@ df_p %>% group_by(Method) %>%
   scale_y_continuous(name = "Percent of LWBS (%)") + 
   scale_x_discrete(name = "Method") + 
   geom_text(size = 3, color = "black", aes(label=percent), 
-            position=position_dodge(width=0.9), vjust=-0.25) +
+            position=position_dodge(width=0.9), vjust=-0.8) +
   ggtitle('The Percentage of LWBS over All Visited Patients across Methods',
           subtitle = "Result of 1000 simulations") + 
   theme_minimal() + 
@@ -86,19 +89,23 @@ df_p %>% group_by(Method) %>%
 
 df_p %>% group_by(AcuteLv, Method) %>% 
   summarise(percent = round(sum(Time_A == "LWBS")*100/n(),2), .groups = 'drop') %>% 
-    ggplot(aes(x=factor(AcuteLv), y=percent, fill=Method)) + 
+    ggplot(aes(x=Method, y=percent, fill=Method)) + 
     geom_bar(stat="identity", position=position_dodge()) + 
-    geom_text(size = 2.5, color = "black", aes(label=percent), 
+    facet_wrap(vars(factor(AcuteLv)), 
+               labeller = as_labeller(c(`1` = "Group 1", `2` = "Group 2", 
+                      `3` = "Group 3", `4` = "Group 4", `5`="Group 5"))) +
+    geom_text(size = 2, color = "black", aes(label=percent), 
               position=position_dodge(width=0.9), vjust=-0.25) + 
     scale_y_continuous(name = "Percent of LWBS (%)") + 
     scale_x_discrete(name = "Priority Group") + 
-    scale_fill_manual(values=c(C1= "#004c6d" ,C2="#4998b6", FIFO="#8fecff")) +  
+    scale_fill_brewer(palette = "RdBu") + 
     ggtitle('The percentage of LWBS across Priority Groups',
-            subtitle = "Result of 1000 simulations") + 
+            subtitle = "Result of 100 simulations") + 
     theme_minimal() + 
     theme(plot.title=element_text(hjust=0.5),
-          plot.subtitle = element_text(hjust=0.5)) 
-
+          plot.subtitle = element_text(hjust=0.5),
+          axis.text.x=element_blank(),
+          axis.ticks.x=element_blank())
 ```
 
 
@@ -106,16 +113,12 @@ df_p %>% group_by(AcuteLv, Method) %>%
 # Mean Satisfaction Score by Day across Methods
 df_p %>% group_by(Day_C, Method) %>% filter(Time_A != "TBD") %>% 
   summarise(mean_SF = round(mean(SF_Score),2)) %>% 
-  ggplot(aes(y=factor(Day_C), x=mean_SF, fill=Method)) +
-   geom_bar(stat="identity", position=position_dodge()) +
-    scale_fill_manual(values=c(C1= "#004c6d" ,C2="#4998b6", FIFO="#c0e4ff")) + 
-    # scale_fill_brewer(palette = "PuBu") +
-    scale_x_continuous(name = "Mean Satisfaction Score") + 
-    scale_y_discrete(name = "Day") + 
-    geom_text(aes(label=mean_SF), position=position_dodge(width=0.9), 
-              hjust=-0.5, size = 2, color="black") + 
+  ggplot() +
+   geom_line(aes(x=Day_C, y=mean_SF, color = Method), stat="identity") +
+    scale_y_continuous(name = "Mean Satisfaction Score") + 
+    scale_x_continuous(name = "Day", breaks=seq(1,15,by=1)) + 
     ggtitle('End-of-day Average Satisfaction Score',
-            subtitle = "Result of 1000 simulations") + 
+            subtitle = "Result of 100 simulations") + 
     theme_minimal() + 
     theme(plot.title=element_text(hjust=0.5),
           plot.subtitle = element_text(hjust=0.5)) 
@@ -127,18 +130,24 @@ df_p %>% group_by(Day_C, Method) %>% filter(Time_A != "TBD") %>%
 # Mean Satisfaction Score by Priority Group across Methods
 df_p %>% group_by(AcuteLv, Method) %>% filter(Time_A != "TBD") %>% 
   summarise(mean_SF = round(mean(SF_Score),2)) %>% 
-  ggplot(aes(x=factor(AcuteLv), y=mean_SF, fill=Method)) + 
+  ggplot(aes(x=Method, y=mean_SF, fill=Method)) + 
+   facet_wrap(vars(factor(AcuteLv)), 
+               labeller = as_labeller(c(`1` = "Group 1", `2` = "Group 2", 
+                      `3` = "Group 3", `4` = "Group 4", `5`="Group 5"))) +
    geom_bar(stat="identity", position=position_dodge()) +
-    scale_fill_manual(values=c(C1= "#004c6d" ,C2="#4998b6", FIFO="#8fecff")) + 
+    # scale_fill_manual(values=c(C1= "#004c6d" ,C2="#4998b6", FIFO="#8fecff")) + 
     scale_y_continuous(name = "Mean Satisfaction Score") + 
-    scale_x_discrete(name = "Priority Group") + 
-    geom_text(size = 3, color = 'black', aes(label=mean_SF), 
-            position=position_dodge(width=0.9), vjust=-0.25)+
+    scale_x_discrete(name = "Priority Group") +
+    scale_fill_brewer(palette="RdBu") + 
+    geom_text(size = 1.8, color = 'black', aes(label=mean_SF), 
+            position=position_dodge(width=0.9), vjust=-0.2)+
     theme_minimal() + 
-    ggtitle('End-of-day Average Satisfaction Score across Priority Groups',
+    ggtitle('Average 15-day Satisfaction Score across Priority Groups',
             subtitle = "Result of 1000 simulations") + 
     theme(plot.title=element_text(hjust=0.5),
-          plot.subtitle = element_text(hjust=0.5)) 
+          plot.subtitle = element_text(hjust=0.5),
+          axis.text.x=element_blank(),
+          axis.ticks.x=element_blank()) 
 ```
 
 
