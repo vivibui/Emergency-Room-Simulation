@@ -9,7 +9,8 @@ def CreateProbe(all_waiting, i, p):
 
 def SelectProbe(all_probes): 
     probe_i = cf.PROBES_ORDER.pop(0) - 1 # since first probe is numbered as 1 
-    cf.PROBES_ORDER.append((probe_i+1))
+    j = probe_i + 1
+    cf.PROBES_ORDER.append((j))
     probe = all_probes[probe_i]
     return probe
 
@@ -226,7 +227,7 @@ def SelectFromQueue(queue, day, time):
 
 ''' 
 
-
+'''
 #################################################################  
 # METHOD 6-1: Z2-PQ - Alternate with Multiple Probes 
 ################################################################# 
@@ -287,8 +288,8 @@ def SelectFromQueue(queue, day, time):
                 return probe[0]
     else: 
         return min_patient 
-
 '''
+
 #################################################################  
 # METHOD 6-2: Z3-Q - Alternate FIFO with Multiple Probes (remove Benchmark W)  
 ################################################################# 
@@ -335,4 +336,3 @@ def SelectFromQueue(queue, day, time):
         probe = SelectProbe(all_probes)
         if probe: 
             return probe[0]
-'''

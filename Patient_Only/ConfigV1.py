@@ -24,7 +24,7 @@ BENCHMARK_L = MAX_WAIT + BENCHMARK_D # remove BENCHMARK_D if using method 1 for 
 ###### For Z2-PQ and Z3-Q
 
 # Specify number of probes  
-PROBES = 4
+PROBES = 5
 
 # OPTIONAL: Specify order of each probe (as list). First probe is 1.
 # PROBES_ORDER = [2,1,4,3]          # <------- Uncomment this if not using default calculation
@@ -33,12 +33,13 @@ all_probes = []
 PROBES_ORDER = []
 flag_probe = 0
 for i in range(PROBES):
-    all_probes.append((i+1))
+    j = i + 1
+    all_probes.append((j))
 while all_probes: 
     if flag_probe == 0: 
         PROBES_ORDER.append(all_probes.pop(0))
         flag_probe = 1
-    if flag_probe == 1: 
+    else: 
         PROBES_ORDER.append(all_probes.pop(-1))
         flag_probe = 0 
 
