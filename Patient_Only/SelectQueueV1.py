@@ -14,7 +14,7 @@ def SelectProbe(all_probes):
     probe = all_probes[probe_i]
     return probe
 
-'''
+''' 
 #################################################################  
 # METHOD 1: First come first serve
 #################################################################
@@ -289,6 +289,7 @@ def SelectFromQueue(queue, day, time):
     else: 
         return min_patient 
 '''
+
 
 #################################################################  
 # METHOD 6-2: Z3-Q - Alternate FIFO with Multiple Probes (remove Benchmark W)  

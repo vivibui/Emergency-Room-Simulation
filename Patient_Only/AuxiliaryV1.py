@@ -20,3 +20,20 @@ def ExportCSV(file_name, content, folder_type, header=None):
 # Increment ID by 1 
 def IDIncrement(id_type): 
     return id_type + 1 
+
+# Calculate default order of probes 
+def CalProbeOrder(probes): 
+    all_probes = []
+    probes_order = []
+    flag_probe = 0
+    for i in range(probes):
+        j = i + 1
+        all_probes.append((j))
+    while all_probes: 
+        if flag_probe == 0: 
+            probes_order.append(all_probes.pop(0))
+            flag_probe = 1
+        else: 
+            probes_order.append(all_probes.pop(-1))
+            flag_probe = 0 
+    return probes_order
