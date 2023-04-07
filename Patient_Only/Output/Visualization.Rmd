@@ -36,7 +36,6 @@ df_er %>%
     geom_density(alpha=.45, col=NA) +
     facet_wrap(vars(Day)) +
     scale_y_continuous(name = "Density") + 
-    scale_x_discrete(name = "Number of Waiting Patients") + 
     ggtitle('Distribution of Waiting Patients by Day', 
             subtitle = "Result of 1000 simulations") + 
     theme_bw() + 
@@ -69,12 +68,12 @@ df_p %>% group_by(Method) %>%
   summarise(percent = round(sum(Time_A == "LWBS")*100/n(),2), 
             .groups = 'drop') %>% 
   ggplot(aes(x=Method, y=percent)) + 
-  geom_col(width = 0.5, fill="steelblue") + 
+  geom_col(width = 0.5, fill="#004c6d") + 
   scale_y_continuous(name = "Percent of LWBS (%)") + 
   scale_x_discrete(name = "Method") + 
-  geom_text(size = 3, aes(label=percent), 
+  geom_text(size = 3, color = "black", aes(label=percent), 
             position=position_dodge(width=0.9), vjust=-0.25) +
-  ggtitle('The Percentage of LWBS across Methods',
+  ggtitle('The Percentage of LWBS over All Visited Patients across Methods',
           subtitle = "Result of 1000 simulations") + 
   theme_minimal() + 
   theme(plot.title=element_text(hjust=0.5),
@@ -92,8 +91,8 @@ df_p %>% group_by(AcuteLv, Method) %>%
     geom_text(size = 2.5, color = "black", aes(label=percent), 
               position=position_dodge(width=0.9), vjust=-0.25) + 
     scale_y_continuous(name = "Percent of LWBS (%)") + 
-    scale_fill_brewer(palette="BuGn") + 
     scale_x_discrete(name = "Priority Group") + 
+    scale_fill_manual(values=c(C1= "#004c6d" ,C2="#4998b6", FIFO="#8fecff")) +  
     ggtitle('The percentage of LWBS across Priority Groups',
             subtitle = "Result of 1000 simulations") + 
     theme_minimal() + 
@@ -109,7 +108,8 @@ df_p %>% group_by(Day_C, Method) %>% filter(Time_A != "TBD") %>%
   summarise(mean_SF = round(mean(SF_Score),2)) %>% 
   ggplot(aes(y=factor(Day_C), x=mean_SF, fill=Method)) +
    geom_bar(stat="identity", position=position_dodge()) +
-    scale_fill_brewer() + 
+    scale_fill_manual(values=c(C1= "#004c6d" ,C2="#4998b6", FIFO="#c0e4ff")) + 
+    # scale_fill_brewer(palette = "PuBu") +
     scale_x_continuous(name = "Mean Satisfaction Score") + 
     scale_y_discrete(name = "Day") + 
     geom_text(aes(label=mean_SF), position=position_dodge(width=0.9), 
@@ -129,7 +129,7 @@ df_p %>% group_by(AcuteLv, Method) %>% filter(Time_A != "TBD") %>%
   summarise(mean_SF = round(mean(SF_Score),2)) %>% 
   ggplot(aes(x=factor(AcuteLv), y=mean_SF, fill=Method)) + 
    geom_bar(stat="identity", position=position_dodge()) +
-    scale_fill_brewer(palette="BuGn") + 
+    scale_fill_manual(values=c(C1= "#004c6d" ,C2="#4998b6", FIFO="#8fecff")) + 
     scale_y_continuous(name = "Mean Satisfaction Score") + 
     scale_x_discrete(name = "Priority Group") + 
     geom_text(size = 3, color = 'black', aes(label=mean_SF), 
