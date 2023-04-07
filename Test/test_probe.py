@@ -48,25 +48,33 @@ queue.enqueue(Patient(11))
 
 print(len(queue.get_queue()))
 
-probes = 4
-p = 2 
+probes = 13
 index = 0 
 matrix = []
-for i in range(probes): 
-    probe = CreateProbe(queue.get_queue(), index, p)
-    matrix.append(probe)
-    index += p
-
-print("CHECK MATRIX:", len(matrix))
-
-
 r = len(queue.get_queue())%probes
-i_matrix = 0 
-for i in range(r): 
-    matrix[i_matrix].append(queue.get_queue()[index])
-    index += 1
-    i_matrix += 1
 
+if len(queue.get_queue()) >= probes: 
+    p = (len(queue.get_queue()) - r) // probes
+    
+    for i in range(probes): 
+        probe = CreateProbe(queue.get_queue(), index, p)
+        matrix.append(probe)
+        index += p
+
+    i_matrix = 0 
+    for i in range(r): 
+        matrix[i_matrix].append(queue.get_queue()[index])
+        index += 1
+        i_matrix += 1
+
+else: 
+    p = 1
+    for i in range(probes): 
+        if index == len(queue.get_queue()):
+            matrix.append([])
+        else: 
+            matrix.append(CreateProbe(queue.get_queue(), index, p))
+        index += 1
 
 count_probe = 0 
 for i in matrix: 

@@ -7,6 +7,12 @@ FLAG = 1
 def CreateProbe(all_waiting, i, p): 
     return all_waiting[i:(i+p)]
 
+def SelectProbe(all_probes): 
+    probe_i = cf.PROBES_ORDER.pop(0) - 1 # since first probe is numbered as 1 
+    cf.PROBES_ORDER.append((probe_i+1))
+    probe = all_probes[probe_i]
+    return probe
+
 '''
 #################################################################  
 # METHOD 1: First come first serve
@@ -220,6 +226,7 @@ def SelectFromQueue(queue, day, time):
 
 ''' 
 
+'''
 #################################################################  
 # METHOD 6-1: Z2-PQ - Alternate with Multiple Probes 
 ################################################################# 
@@ -272,9 +279,7 @@ def SelectFromQueue(queue, day, time):
         return probe[0]
     else: 
         return min_patient 
-
-    
-    
+'''
 
 #################################################################  
 # METHOD 6-2: Z3-Q - Alternate FIFO with Multiple Probes (remove Benchmark W)  
@@ -283,3 +288,42 @@ def SelectFromQueue(queue, day, time):
 # Get patient to assign to bed 
         # Divide the queue into the number of probes 
         # Alternate between selecting the first-in-line in each probe 
+
+def SelectFromQueue(queue, day, time):
+    
+    # Initialize
+    all_waiting = queue.get_queue() 
+    all_probes = [] 
+    index = 0 
+    i_matrix = 0 
+    
+    if len(all_waiting) >= cf.PROBES: 
+        # Find number of patients per probe
+        r = len(all_waiting) % cf.PROBES # remainder 
+        p_per_probe = (len(all_waiting) - r)//cf.PROBES 
+
+        # Add patient to each probe
+        for i in range(cf.PROBES):
+            all_probes.append(CreateProbe(all_waiting, index, p_per_probe))
+            index += p_per_probe
+
+        for i in range(r): # assign remainders to probes starting from first probe 
+            all_probes[i_matrix].append(all_waiting[index])
+            i_matrix += 1
+            index += 1
+    else: 
+        p_per_probe = 1 
+        for i in range(cf.PROBES): 
+            if index == len(all_waiting): 
+                all_probes.append([])
+            else: 
+                all_probes.append(CreateProbe(all_waiting, index, p_per_probe))
+            index += 1
+
+    # Select patient 
+    # If selected probe has 0 patient
+        # move to next probe in order till get a patient 
+    while True: 
+        probe = SelectProbe(all_probes)
+        if probe: 
+            return probe[0]
