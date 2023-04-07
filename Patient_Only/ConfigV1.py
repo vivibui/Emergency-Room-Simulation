@@ -1,6 +1,4 @@
 
-import QueueV1 as queue 
-
 # Description: store all global variables to be used across modules 
 
 # Max days to run simulation 
@@ -28,20 +26,20 @@ BENCHMARK_L = MAX_WAIT + BENCHMARK_D # remove BENCHMARK_D if using method 1 for 
 # Specify number of probes  
 PROBES = 4
 
-# OPTIONAL: Specify order of each probe (as list) 
+# OPTIONAL: Specify order of each probe (as list). First probe is 1.
 # PROBES_ORDER = [2,1,4,3]          # <------- Uncomment this if not using default calculation
 # Default calculation
 all_probes = []
-PROBES_ORDER = queue.Queue()
+PROBES_ORDER = []
 flag_probe = 0
 for i in range(PROBES):
-    all_probes.append(i)
+    all_probes.append((i+1))
 while all_probes: 
     if flag_probe == 0: 
-        PROBES_ORDER.enqueue(all_probes.pop(0))
+        PROBES_ORDER.append(all_probes.pop(0))
         flag_probe = 1
     if flag_probe == 1: 
-        PROBES_ORDER.enqueue(all_probes.pop(-1))
+        PROBES_ORDER.append(all_probes.pop(-1))
         flag_probe = 0 
 
     
