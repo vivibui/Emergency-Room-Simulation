@@ -20,7 +20,7 @@ BENCHMARK_L = MAX_WAIT + BENCHMARK_D # remove BENCHMARK_D if using method 1 for 
 
 ###### For Z2-PQ and Z3-Q ###### 
 # Specify number of probes  
-PROBES = 5
+PROBES = 4
 # OPTIONAL: Specify order of each probe (as list). First probe is 1.
 # PROBES_ORDER = [2,1,4,3]          # <------- Uncomment this if not using default calculation
 PROBES_ORDER = aux.CalProbeOrder(PROBES)
