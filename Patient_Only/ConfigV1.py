@@ -1,4 +1,5 @@
 
+import QueueV1 as queue 
 
 # Description: store all global variables to be used across modules 
 
@@ -16,3 +17,34 @@ BENCHMARK_D = 30
 # Benchmark of wait time when patient decide to leave the ER 
 MAX_WAIT = 720
 BENCHMARK_L = MAX_WAIT + BENCHMARK_D # remove BENCHMARK_D if using method 1 for SF Calculation 
+
+##########################################################
+#################### FOR SELECT QUEUE ####################
+##########################################################
+
+
+###### For Z2-PQ and Z3-Q
+
+# Specify number of probes  
+PROBES = 4
+
+# OPTIONAL: Specify order of each probe (as list) 
+# PROBES_ORDER = [2,1,4,3]          # <------- Uncomment this if not using default calculation
+# Default calculation
+all_probes = []
+PROBES_ORDER = queue.Queue()
+flag_probe = 0
+for i in range(PROBES):
+    all_probes.append(i)
+while all_probes: 
+    if flag_probe == 0: 
+        PROBES_ORDER.enqueue(all_probes.pop(0))
+        flag_probe = 1
+    if flag_probe == 1: 
+        PROBES_ORDER.enqueue(all_probes.pop(-1))
+        flag_probe = 0 
+
+    
+
+
+
