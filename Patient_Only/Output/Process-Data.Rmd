@@ -174,17 +174,14 @@ df_p_z2pq_copy <- df_p_z2pq_copy %>% mutate(Method = "Z2-PQ")
 df_p_z3q_copy <- df_p_z3q_copy %>% mutate(Method = "Z3-Q")
 
 # Merge
-df_er <- list(df_er_c1_copy, df_er_c2_copy, df_er_fifo_copy,
+df_er <- rbind(df_er_c1_copy, df_er_c2_copy, df_er_fifo_copy,
             df_er_a1pp_copy, df_er_a2pq_copy, df_er_z1pq_copy,
             df_er_z2pq_copy, df_er_z3q_copy)
 
-df_p <- list(df_er_c1_copy, df_er_c2_copy, df_er_fifo_copy,
-            df_er_a1pp_copy, df_er_a2pq_copy, df_er_z1pq_copy,
-            df_er_z2pq_copy, df_er_z3q_copy)
 
-df_er <- df_er %>% reduce(full_join, by=c("Sim_N", "Day", "Time", "New_Patients", "Waiting", "Assigned", "Discharged", "Beds_Avail_EOH", "Method"))
-
-df_p <- df_p %>% reduce(full_join, by=c("Sim_N", "Day", "Time", "New_Patients", "Waiting", "Assigned", "Discharged", "Beds_Avail_EOH", "Method"))
+df_p <- rbind(df_p_c1_copy, df_p_c2_copy, df_p_fifo_copy,
+            df_p_a1pp_copy, df_p_a2pq_copy, df_p_z1pq_copy,
+            df_p_z2pq_copy, df_p_z3q_copy)
 
 ```
 
