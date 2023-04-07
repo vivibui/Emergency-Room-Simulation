@@ -89,6 +89,24 @@ def SelectFromQueue(queue, day, time):
         # If the wait time of first patient in queue passes Bechnmark W: 
             # Alternate between selecting the max and min priority score 
             # If multiple patients have the same min and max score, thenn base on the order
+
+
+
+#################################################################  
+# METHOD 5: A2 - Alternate with Two Probes 
+################################################################# 
+
+# Get patient to assign to bed 
+        #### Before Benchmark W: Based on Priority Score 
+        #### After Benchmark W: Alternate 
+        # First, base on priority score: the lower the higher the priority 
+        # If multiple patients have the same min priority score, then base on order: 
+            # the smaller the id the higher the priority 
+        # If the wait time of first patient in queue passes Bechnmark W: 
+            # Divide the queue into half 
+            # Alternate between selecting the max and min priority score in proble 1 and 2 
+            # If multiple patients have the same min and max score, then base on the order
+
 def SelectFromQueue(queue, day, time):
     # Initialize
     min_score = 10000 
@@ -123,24 +141,6 @@ def SelectFromQueue(queue, day, time):
             return probe1[0]
     else: 
         return min_patient 
-
-
-
-#################################################################  
-# METHOD 5: A2 - Alternate with Two Probes 
-################################################################# 
-
-# Get patient to assign to bed 
-        #### Before Benchmark W: Based on Priority Score 
-        #### After Benchmark W: Alternate 
-        # First, base on priority score: the lower the higher the priority 
-        # If multiple patients have the same min priority score, then base on order: 
-            # the smaller the id the higher the priority 
-        # If the wait time of first patient in queue passes Bechnmark W: 
-            # Divide the queue into half 
-            # Alternate between selecting the max and min priority score in proble 1 and 2 
-            # If multiple patients have the same min and max score, then base on the order
-
 
 
 #################################################################  
