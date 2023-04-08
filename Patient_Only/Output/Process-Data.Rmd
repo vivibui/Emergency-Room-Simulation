@@ -24,7 +24,7 @@ NOTE: Before running the program
     (a) EXPORT_FILES
     (b) CREATE_COPY
     (c) MERGE 
-3. In EXPORT_FILES, created an empty "Processed" folder in the designated path 
+3. In EXPORT_FILES, create an empty "Processed" folder in the designated path 
 
 ```{R, results='hide', message=FALSE, warning=FALSE}
 

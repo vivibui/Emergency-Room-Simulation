@@ -1,0 +1,39 @@
+VALUE OF CONFIG: 
+
+Max days = 15
+Max patients = 5
+Max beds = 15
+Benchmark W = 240
+Benchmark D = 30 
+Max wait = 720 
+
+Probes = 4 
+Calc probes order: Default 
+
+----------------------
+Method of Calc SF: 2 (d_point starts after benchmark) 
+
+----------------------
+VALUE OF PATIENT OPS: 
+
+Priority Score
+
+<=10 or >= 65: 
+	+= 0.1 
+>10 and <21: 
+	+= 0.2 
+Else: 
+	+= 0.3
+----------------------
+Time in ER
+
+Acute == 1: 
+	1, 1200 
+Acute == 2: 
+	1, 900 
+Acute == 3: 
+	1, 600 
+Acute == 4: 
+	1, 240 
+Acute == 5: 
+	1, 120 

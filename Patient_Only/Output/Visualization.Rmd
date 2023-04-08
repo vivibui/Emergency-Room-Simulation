@@ -14,8 +14,6 @@ library(dplyr)
 library(tidyverse)
 library(ggplot2)
 library(ggforce) 
-library("viridis")
-
 ```
 
 
@@ -37,8 +35,9 @@ df_er %>%
     geom_density(alpha=.45, col=NA) +
     facet_wrap(vars(Day)) +
     scale_y_continuous(name = "Density") + 
-    ggtitle('Distribution of Waiting Patients by Day', 
-            subtitle = "Result of 1000 simulations") + 
+    labs(title = 'Distribution of Waiting Patients by Day', 
+            subtitle = "Overcrowding Rate: High",
+            caption = "Result of 100 simulations") + 
     theme_bw() + 
     theme(plot.title=element_text(hjust=0.5),
           plot.subtitle = element_text(hjust=0.5)) 
@@ -55,8 +54,9 @@ ggplot(df_p, aes(y=Total_Wait_Time, x=Method)) +
     geom_violin() + 
     scale_y_continuous(name = "Wait Time") + 
     scale_x_discrete(name = "Method") +
-    ggtitle('Distribution of Wait Time across Methods', 
-            subtitle = "Result of 1000 simulations") +  
+    labs(title = 'Distribution of Wait Time across Methods', 
+            subtitle = "Overcrowding Rate: High",
+            caption = "Result of 100 simulations") +  
     theme_minimal() +
     theme(plot.title=element_text(hjust=0.5),
           plot.subtitle = element_text(hjust=0.5),
@@ -76,8 +76,9 @@ df_p %>% group_by(Method) %>%
   scale_x_discrete(name = "Method") + 
   geom_text(size = 3, color = "black", aes(label=percent), 
             position=position_dodge(width=0.9), vjust=-0.8) +
-  ggtitle('The Percentage of LWBS over All Visited Patients across Methods',
-          subtitle = "Result of 1000 simulations") + 
+  labs(title = 'The Percentage of LWBS over All Visited Patients across Methods', 
+            subtitle = "Overcrowding Rate: High",
+            caption = "Result of 100 simulations") +
   theme_minimal() + 
   theme(plot.title=element_text(hjust=0.5),
         plot.subtitle = element_text(hjust=0.5)) 
@@ -99,8 +100,9 @@ df_p %>% group_by(AcuteLv, Method) %>%
     scale_y_continuous(name = "Percent of LWBS (%)") + 
     scale_x_discrete(name = "Priority Group") + 
     scale_fill_brewer(palette = "RdBu") + 
-    ggtitle('The percentage of LWBS across Priority Groups',
-            subtitle = "Result of 100 simulations") + 
+    labs(title='The percentage of LWBS across Priority Groups',
+            subtitle = "Overcrowding Rate: High",
+            caption="Result of 100 simulations") + 
     theme_minimal() + 
     theme(plot.title=element_text(hjust=0.5),
           plot.subtitle = element_text(hjust=0.5),
@@ -117,8 +119,9 @@ df_p %>% group_by(Day_C, Method) %>% filter(Time_A != "TBD") %>%
    geom_line(aes(x=Day_C, y=mean_SF, color = Method), stat="identity") +
     scale_y_continuous(name = "Mean Satisfaction Score") + 
     scale_x_continuous(name = "Day", breaks=seq(1,15,by=1)) + 
-    ggtitle('End-of-day Average Satisfaction Score',
-            subtitle = "Result of 100 simulations") + 
+    labs(title='End-of-day Average Satisfaction Score',
+            subtitle = "Overcrowding Rate: High",
+            caption="Result of 100 simulations") + 
     theme_minimal() + 
     theme(plot.title=element_text(hjust=0.5),
           plot.subtitle = element_text(hjust=0.5)) 
@@ -142,8 +145,9 @@ df_p %>% group_by(AcuteLv, Method) %>% filter(Time_A != "TBD") %>%
     geom_text(size = 1.8, color = 'black', aes(label=mean_SF), 
             position=position_dodge(width=0.9), vjust=-0.2)+
     theme_minimal() + 
-    ggtitle('Average 15-day Satisfaction Score across Priority Groups',
-            subtitle = "Result of 1000 simulations") + 
+    labs(title='Average 15-day Satisfaction Score across Priority Groupse',
+            subtitle = "Overcrowding Rate: High",
+            caption="Result of 100 simulations") + 
     theme(plot.title=element_text(hjust=0.5),
           plot.subtitle = element_text(hjust=0.5),
           axis.text.x=element_blank(),
