@@ -15,14 +15,14 @@ def SelectProbe(all_probes):
     return probe
 
 
-''' 
+
 #################################################################  
 # METHOD 1: First come first serve
 #################################################################
 def SelectFromQueue(queue, day, time):
     return queue.get_queue()[0]
 
-''' 
+ 
 
 ''' 
 #################################################################  
@@ -58,7 +58,7 @@ def SelectFromQueue(queue, day, time):
         return min_patient 
 ''' 
 
-''' 
+'''
 #################################################################  
 # METHOD 3: C2 
 ################################################################# 
@@ -88,9 +88,9 @@ def SelectFromQueue(queue, day, time):
         return all_waiting[-1] # LIFO apply when the patient with the longest wait time hits Benchmark W 
     else: 
         return min_patient 
-''' 
+'''
 
-''' 
+'''
 #################################################################  
 # METHOD 4-1: A1-PP - Alternate (Priority)
 ################################################################# 
@@ -103,7 +103,7 @@ def SelectFromQueue(queue, day, time):
             # the smaller the id the higher the priority 
         # If the wait time of first patient in queue passes Bechnmark W: 
             # Alternate between selecting the max and min priority score 
-            # If multiple patients have the same min or max score, thenn base on the order
+            # If multiple patients have the same min or max score, then base on the order
 
 def SelectFromQueue(queue, day, time):
     # Initialize
@@ -134,9 +134,9 @@ def SelectFromQueue(queue, day, time):
             return max_patient
     else: 
         return min_patient 
+'''
+
 ''' 
-
-
 #################################################################  
 # METHOD 4-2: A2-PQ - Alternate (FIFO and LIFO)
 ################################################################# 
@@ -175,7 +175,7 @@ def SelectFromQueue(queue, day, time):
             return all_waiting[-1]
     else: 
         return min_patient 
-
+''' 
 
 '''
 #################################################################  

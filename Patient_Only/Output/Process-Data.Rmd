@@ -186,6 +186,14 @@ df_p <- rbind(df_p_c1_copy, df_p_c2_copy, df_p_fifo_copy,
 ```
 
 
+```{R, results='hide', message=FALSE, warning=FALSE}
+
+############# EXPORT FILES #############
+
+export_file(df_er, paste(main_path, "df_er.csv", sep="/"))
+export_file(df_p, paste(main_path, "df_p.csv", sep="/"))
+
+```
 
 
 
