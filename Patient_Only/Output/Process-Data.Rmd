@@ -43,33 +43,33 @@ create_file <- function(dir){
   return (file_contents %>% map(as_tibble) %>% reduce(full_join)) }
 
 # Run function 
-df_er_c1 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/C1/EmergencyRoom")
-df_er_c2 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/C2/EmergencyRoom")
-df_er_fifo <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/FIFO/EmergencyRoom")
-df_er_a1pp <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/A1-PP/EmergencyRoom")
-df_er_a2pq <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/A2-PQ/EmergencyRoom")
-df_er_z1pq <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/Z1-PQ/EmergencyRoom")
-df_er_z2pq <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/Z2-PQ/EmergencyRoom")
-df_er_z3q <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/Z3-Q/EmergencyRoom")
+df_er_c1 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/C1/EmergencyRoom")
+df_er_c2 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/C2/EmergencyRoom")
+df_er_fifo <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/FIFO/EmergencyRoom")
+df_er_a1pp <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/A1-PP/EmergencyRoom")
+df_er_a2pq <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/A2-PQ/EmergencyRoom")
+df_er_z1pq <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/Z1-PQ/EmergencyRoom")
+df_er_z2pq <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/Z2-PQ/EmergencyRoom")
+df_er_z3q <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/Z3-Q/EmergencyRoom")
 
 
-df_p_c1 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/C1/PatientList")
-df_p_c2 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/C2/PatientList")
-df_p_fifo <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/FIFO/PatientList") 
-df_p_a1pp <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/A1-PP/PatientList")
-df_p_a2pq <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/A2-PQ/PatientList")
-df_p_z1pq <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/Z1-PQ/PatientList")
-df_p_z2pq <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/Z2-PQ/PatientList")
-df_p_z3q <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/Z3-Q/PatientList")
+df_p_c1 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/C1/PatientList")
+df_p_c2 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/C2/PatientList")
+df_p_fifo <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/FIFO/PatientList") 
+df_p_a1pp <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/A1-PP/PatientList")
+df_p_a2pq <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/A2-PQ/PatientList")
+df_p_z1pq <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/Z1-PQ/PatientList")
+df_p_z2pq <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/Z2-PQ/PatientList")
+df_p_z3q <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/Z3-Q/PatientList")
 
-df_sf_c1 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/C1/Satisfaction")
-df_sf_c2 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/C2/Satisfaction")
-df_sf_fifo <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/FIFO/Satisfaction")
-df_sf_a1pp <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/A1-PP/Satisfaction")
-df_sf_a2pq <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/A2-PQ/Satisfaction")
-df_sf_z1pq <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/Z1-PQ/Satisfaction")
-df_sf_z2pq <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/Z2-PQ/Satisfaction")
-df_sf_z3q <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/Z3-Q/Satisfaction")
+df_sf_c1 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/C1/Satisfaction")
+df_sf_c2 <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/C2/Satisfaction")
+df_sf_fifo <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/FIFO/Satisfaction")
+df_sf_a1pp <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/A1-PP/Satisfaction")
+df_sf_a2pq <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/A2-PQ/Satisfaction")
+df_sf_z1pq <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/Z1-PQ/Satisfaction")
+df_sf_z2pq <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/Z2-PQ/Satisfaction")
+df_sf_z3q <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/Z3-Q/Satisfaction")
 ```
 
 
@@ -78,7 +78,7 @@ df_sf_z3q <- create_file("~/Desktop/Emergency-Room-Simulation/Patient_Only/Outpu
 ############# EXPORT FILES #############
 
 # Create Function 
-main_path = "~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3A/Processed"
+main_path = "~/Desktop/Emergency-Room-Simulation/Patient_Only/Output/3C/Processed"
 export_file <- function(df, path) {
   write.csv(df, path, row.names=FALSE)
 }
