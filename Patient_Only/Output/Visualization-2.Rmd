@@ -74,7 +74,7 @@ df_p_3 %>% group_by(Method, Overcrowding) %>%
   geom_text(size = 2.5, color = "black", aes(label=percent), 
             position=position_dodge(width=0.9), vjust=-0.8) +
   labs(title = 'The Percentage of LWBS over All Visited Patients',
-       subtitle = 'Across Methods and Overcrowding level', 
+       subtitle = 'Across Methods and Overcrowding Levels', 
             caption = "Result of 100 simulations",
             fill = "Overcrowding Level") +
   theme_minimal() + 
