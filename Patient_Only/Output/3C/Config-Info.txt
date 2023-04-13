@@ -1,4 +1,4 @@
-VALUE OF CONFIG: 
+MaVALUE OF CONFIG: 
 
 Max days = 15
 Max patients = 5
