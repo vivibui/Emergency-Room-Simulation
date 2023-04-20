@@ -5,4 +5,4 @@
 ** Emergency Room Simulation ** Creates a simulated environment that replicates the operation of an emergency room. We develop and test results of different algorithms in prioritizing waiting patients to receive treatment in different context of congestions in the ER. 
 
 ## Online Demo
-<video src='https://www.veed.io/view/cad4eb96-3a62-4522-a488-82e71598372b?panel=share' width=180/>
+![Output sample](https://www.veed.io/view/cad4eb96-3a62-4522-a488-82e71598372b/showcase)
