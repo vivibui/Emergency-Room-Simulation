@@ -3,7 +3,7 @@
 <a href='https://raw.githubusercontent.com/vivibui/Emergency-Room-Simulation/main/Architecture/ModuleArchitecture.png'><img src='https://img.shields.io/badge/Architecture-View-Green'></a>  <a href='https://github.com/vivibui/Emergency-Room-Simulation/blob/main/VivianBui_ERSimulation.pdf'><img src='https://img.shields.io/badge/Paper-PDF-red'></a>
 
 **Emergency Room Simulation** 
-This is a simulation that replicates the operation of an emergency room. We develop and test results of different algorithms in prioritizing waiting patients to receive treatment in different context of congestions in the ER. 
+The simulation replicates the operation of an emergency room. We develop and test results of different algorithms in prioritizing waiting patients to receive treatment in different context of congestions in the ER. 
 
 ## Demo: How to Setup and Run the Simulation
 [![](https://github.com/vivibui/Emergency-Room-Simulation/blob/main/thumbnail1.png)](https://www.youtube.com/watch?v=PPtSiwGfgzM)
