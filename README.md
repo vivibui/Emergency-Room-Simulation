@@ -6,7 +6,7 @@
 This is a simulation that replicates the operation of an emergency room. We develop and test results of different algorithms in prioritizing waiting patients to receive treatment in different context of congestions in the ER. 
 
 ## Demo
-[![SETUP]([http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg](https://github.com/vivibui/Emergency-Room-Simulation/blob/main/Video.png))](https://youtu.be/f7BTjMnRw4c)
+[![SETUP](https://github.com/vivibui/Emergency-Room-Simulation/blob/main/thumbnail.png)(https://www.youtube.com/watch?v=PPtSiwGfgzM)
 
 ## Process Data and Visualize Results
 The folder Process and Visualize includes Rmarkdown files that are used to process and visualize results as seen in the paper. Detailed instruction can be found in the files. Make sure you have RStudio to open and execute the files. 
