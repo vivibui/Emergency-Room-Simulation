@@ -11,8 +11,8 @@ The simulation replicates the operation of an emergency room. We develop and tes
 ## Process Data and Visualize Results
 The folder Process and Visualize includes Rmarkdown files that are used to process and visualize results as seen in the paper. Detailed instruction can be found in the files. Make sure you have RStudio to open and execute the files. It is recommended to run these files in the following order: 
 
-- Process Data: Combined all simulations into one dataset by denoting the seed number and selection algorithm used per simulation. 
-- Visualization 1: Visualization for each congestion levels. 
+- Process Data: Combined all simulations into one dataset by denoting the seed number and selection algorithm used per simulation 
+- Visualization 1: Visualization for each congestion level
 - Visualization 2: Visualization for all congestion levels (as Figure 4 and 5 in the [Whitepaper](https://github.com/vivibui/Emergency-Room-Simulation/blob/main/VivianBui_ERSimulation.pdf)) 
 
 ## Problem Setup
@@ -30,4 +30,4 @@ At the beginning of the simulation, the emergency room will be allocated a prede
 
 **Levels of Overcrowding.** There is no universal or national metric to measure the level of crowding in emergency departments. The estimation of “High”, “Medium”, and “Low” level of overcrowding, in fact, is made in relation to the rate of LWBS patients. As we are interested in observing how the algorithms behave in extreme overcrowding scenarios, we configure the initial conditions in a way that will result in the LWBS rate at least equal to or larger than the provided clinical data. The results are then divided into three scenarios, where the difference between levels justifies the smaller percentage of overall LWBS patients across algorithms.
 
-For more detailed, please refer to the [Whitepaper.](https://github.com/vivibui/Emergency-Room-Simulation/blob/main/VivianBui_ERSimulation.pdf)
+For more detailed, please refer to the [Whitepaper](https://github.com/vivibui/Emergency-Room-Simulation/blob/main/VivianBui_ERSimulation.pdf).
