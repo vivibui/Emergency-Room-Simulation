@@ -9,7 +9,11 @@ The simulation replicates the operation of an emergency room. We develop and tes
 [![](https://github.com/vivibui/Emergency-Room-Simulation/blob/main/thumbnail1.png)](https://www.youtube.com/watch?v=HdrQe3GSlfE)
 
 ## Process Data and Visualize Results
-The folder Process and Visualize includes Rmarkdown files that are used to process and visualize results as seen in the paper. Detailed instruction can be found in the files. Make sure you have RStudio to open and execute the files. 
+The folder Process and Visualize includes Rmarkdown files that are used to process and visualize results as seen in the paper. Detailed instruction can be found in the files. Make sure you have RStudio to open and execute the files. It is recommended to run these files in the following order: 
+
+    (1) Process Data: Combined all simulations into one dataset by denoting the seed number and selection algorithm used per simulation. 
+    (2) Visualization 1: Visualization for each congestion levels. 
+    (3) Visualization 2: Visualization for all congestion levels (as described as Figure 4 and 5 in the [Whitepaper](https://github.com/vivibui/Emergency-Room-Simulation/blob/main/VivianBui_ERSimulation.pdf)) 
 
 ## Problem Setup
 At the beginning of the simulation, the emergency room will be allocated a predetermined number of un-occupied beds for new patients. Every hour, a stochastic number of patients will arrive at the ER and require bed assignments. Upon arrival, each patient will undergo a triage process and will then be placed into a waiting queue. If a bed becomes available, a waiting patient who has been prioritized according to the selected algorithm will be assigned to the bed. Subsequently, after a duration of time has elapsed in the emergency bed, the treated patient will vacate the bed, making it available for the next waiting patient. The simulation will cease after running for the designated number of days as per the assignment.
@@ -26,4 +30,4 @@ At the beginning of the simulation, the emergency room will be allocated a prede
 
 **Levels of Overcrowding.** There is no universal or national metric to measure the level of crowding in emergency departments. The estimation of “High”, “Medium”, and “Low” level of overcrowding, in fact, is made in relation to the rate of LWBS patients. As we are interested in observing how the algorithms behave in extreme overcrowding scenarios, we configure the initial conditions in a way that will result in the LWBS rate at least equal to or larger than the provided clinical data. The results are then divided into three scenarios, where the difference between levels justifies the smaller percentage of overall LWBS patients across algorithms.
 
-For more detailed, please refer to the [Whitepaper](https://github.com/vivibui/Emergency-Room-Simulation/blob/main/VivianBui_ERSimulation.pdf)
+For more detailed, please refer to the [Whitepaper.](https://github.com/vivibui/Emergency-Room-Simulation/blob/main/VivianBui_ERSimulation.pdf)
