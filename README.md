@@ -11,9 +11,9 @@ The simulation replicates the operation of an emergency room. We develop and tes
 ## Process Data and Visualize Results
 The folder Process and Visualize includes Rmarkdown files that are used to process and visualize results as seen in the paper. Detailed instruction can be found in the files. Make sure you have RStudio to open and execute the files. It is recommended to run these files in the following order: 
 
-(1) Process Data: Combined all simulations into one dataset by denoting the seed number and selection algorithm used per simulation. 
-(2) Visualization 1: Visualization for each congestion levels. 
-(3) Visualization 2: Visualization for all congestion levels (as described as Figure 4 and 5 in the [Whitepaper](https://github.com/vivibui/Emergency-Room-Simulation/blob/main/VivianBui_ERSimulation.pdf)) 
+- Process Data: Combined all simulations into one dataset by denoting the seed number and selection algorithm used per simulation. 
+- Visualization 1: Visualization for each congestion levels. 
+- Visualization 2: Visualization for all congestion levels (as described as Figure 4 and 5 in the [Whitepaper](https://github.com/vivibui/Emergency-Room-Simulation/blob/main/VivianBui_ERSimulation.pdf)) 
 
 ## Problem Setup
 At the beginning of the simulation, the emergency room will be allocated a predetermined number of un-occupied beds for new patients. Every hour, a stochastic number of patients will arrive at the ER and require bed assignments. Upon arrival, each patient will undergo a triage process and will then be placed into a waiting queue. If a bed becomes available, a waiting patient who has been prioritized according to the selected algorithm will be assigned to the bed. Subsequently, after a duration of time has elapsed in the emergency bed, the treated patient will vacate the bed, making it available for the next waiting patient. The simulation will cease after running for the designated number of days as per the assignment.
